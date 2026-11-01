@@ -3,7 +3,7 @@
 {% block content %}
 <div class="max-w-lg mx-auto">
   {% if certificate %}
-  <div class="bg-white rounded-xl border-2 border-emerald-500 p-8">
+  <div class="bg-white rounded-md border-2 border-emerald-500 p-8">
     <p class="text-emerald-700 font-bold text-xl mb-4">✓ {% translate "Certificado válido" %}</p>
     <dl class="space-y-3 text-sm">
       <div><dt class="text-slate-500">{% translate "Código" %}</dt><dd class="font-mono">{{ certificate.code }}</dd></div>
@@ -16,11 +16,11 @@
     <p class="text-xs text-amber-800 bg-amber-50 rounded p-2 mt-6">{% translate "Prototipo académico: este certificado no tiene validez oficial." %}</p>
   </div>
   {% else %}
-  <div class="bg-white rounded-xl border-2 border-rose-400 p-8">
+  <div class="bg-white rounded-md border-2 border-rose-400 p-8">
     <p class="text-rose-700 font-bold text-xl mb-2">✗ {% translate "Certificado no encontrado" %}</p>
     <p class="text-sm">{% blocktranslate %}No existe ningún certificado con el código <span class="font-mono">{{ code }}</span>. Revisa que lo hayas escrito bien.{% endblocktranslate %}</p>
   </div>
   {% endif %}
-  <a href="{% url 'certificates:verify' %}" class="inline-block mt-4 text-sm text-teal-700 underline">{% translate "Verificar otro código" %}</a>
+  <a href="{% url 'certificates:verify' %}" class="inline-block mt-4 text-sm text-brand-600 underline">{% translate "Verificar otro código" %}</a>
 </div>
 {% endblock %}

@@ -6,12 +6,12 @@
     <h1 class="text-3xl font-bold">{% translate "Tablero de indicadores" %}</h1>
     <p class="text-slate-600">{% translate "Calculado a partir del historial de cada solicitud." %}</p>
   </div>
-  <a href="{% url 'metrics:export_csv' %}" class="border border-slate-300 bg-white hover:bg-slate-50 rounded-lg px-4 py-2 text-sm font-medium">⬇ {% translate "Exportar CSV" %}</a>
+  <a href="{% url 'metrics:export_csv' %}" class="border border-slate-300 bg-white hover:bg-slate-50 rounded px-4 py-2 text-sm font-medium">⬇ {% translate "Exportar CSV" %}</a>
 </div>
 
 <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8" aria-label="{% translate 'Solicitudes por estado' %}">
   {% for row in status_counts %}
-  <div class="bg-white border border-slate-200 rounded-xl p-4">
+  <div class="bg-white border border-slate-200 rounded-md p-4">
     <p class="text-xs text-slate-500">{{ row.status.label }}</p>
     <p class="text-3xl font-bold tabular-nums">{{ row.count }}</p>
   </div>
@@ -19,7 +19,7 @@
 </section>
 
 <div class="grid lg:grid-cols-2 gap-6 mb-8">
-  <section class="bg-white border border-slate-200 rounded-xl p-6">
+  <section class="bg-white border border-slate-200 rounded-md p-6">
     <h2 class="font-semibold text-lg mb-4">{% translate "Tiempo promedio por trámite" %}</h2>
     <table class="w-full text-sm">
       <thead class="text-left text-slate-500"><tr><th class="pb-2">{% translate "Trámite" %}</th><th class="pb-2 text-right">{% translate "Activas" %}</th><th class="pb-2 text-right">{% translate "Resueltas" %}</th><th class="pb-2 text-right">{% translate "Promedio" %}</th><th class="pb-2 text-right">{% translate "Estimado" %}</th></tr></thead>
@@ -38,7 +38,7 @@
     <p class="text-xs text-slate-500 mt-3">{% translate "Promedio en días calendario desde la radicación hasta la resolución. Estimado en días hábiles." %}</p>
   </section>
 
-  <section class="bg-white border border-slate-200 rounded-xl p-6">
+  <section class="bg-white border border-slate-200 rounded-md p-6">
     <h2 class="font-semibold text-lg mb-4">{% translate "Tiempo promedio por etapa" %}</h2>
     {% if stage_rows %}
     <ul class="space-y-3">
@@ -47,7 +47,7 @@
         <div class="flex justify-between text-sm"><span>{{ row.stage.procedure.display_name }} · <strong>{{ row.stage.department.display_name }}</strong></span>
           <span class="tabular-nums {% if row.avg_days > row.deadline_days %}text-rose-700 font-semibold{% endif %}">{{ row.avg_days }} / {{ row.deadline_days }} d</span></div>
         <div class="h-2 bg-slate-100 rounded mt-1" role="presentation">
-          <div class="h-2 rounded {% if row.avg_days > row.deadline_days %}bg-rose-500{% else %}bg-teal-600{% endif %}" style="width: {% widthratio row.avg_days row.deadline_days 100 as pct %}{% if pct|add:0 > 100 %}100{% else %}{{ pct }}{% endif %}%"></div>
+          <div class="h-2 rounded {% if row.avg_days > row.deadline_days %}bg-rose-500{% else %}bg-brand-500{% endif %}" style="width: {% widthratio row.avg_days row.deadline_days 100 as pct %}{% if pct|add:0 > 100 %}100{% else %}{{ pct }}{% endif %}%"></div>
         </div>
       </li>
       {% endfor %}
@@ -58,7 +58,7 @@
 </div>
 
 <div class="grid lg:grid-cols-2 gap-6">
-  <section class="bg-white border border-slate-200 rounded-xl p-6">
+  <section class="bg-white border border-slate-200 rounded-md p-6">
     <h2 class="font-semibold text-lg mb-4">{% translate "Cuellos de botella" %}</h2>
     {% if bottlenecks %}
     <ul class="list-disc pl-5 text-sm space-y-1">
@@ -69,7 +69,7 @@
     {% else %}<p class="text-sm text-slate-500">{% translate "Ninguna etapa supera su plazo en promedio." %}</p>{% endif %}
   </section>
 
-  <section class="bg-white border border-slate-200 rounded-xl p-6">
+  <section class="bg-white border border-slate-200 rounded-md p-6">
     <h2 class="font-semibold text-lg mb-4">{% translate "Alertas de plazo" %}</h2>
     {% if deadlines.overdue or deadlines.due_soon %}
     <ul class="text-sm space-y-2">

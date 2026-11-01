@@ -1,12 +1,16 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}{% translate "Catálogo de trámites" %}{% endblock %}
 {% block content %}
-<h1 class="text-3xl font-bold mb-2">{% translate "Catálogo de trámites" %}</h1>
-<p class="text-slate-600 mb-6">{% translate "Consulta requisitos, documentos, etapas y tiempos antes de radicar." %}</p>
-<form method="get" class="form-field mb-6 max-w-lg" role="search">
-  <label for="q" class="sr-only">{% translate "Buscar trámite" %}</label>
-  <input type="search" id="q" name="q" value="{{ query }}" placeholder="{% translate 'Buscar trámite…' %}"
-         hx-get="{% url 'catalog:list' %}" hx-trigger="input changed delay:300ms, search" hx-target="#results" hx-push-url="true">
-</form>
+<section class="bg-brand-600 text-white rounded-md px-6 py-8 mb-8 shadow">
+  <h1 class="text-3xl font-bold">{% translate "Catálogo de trámites" %}</h1>
+  <p class="mt-2 text-brand-50 max-w-2xl">{% translate "Consulta requisitos, documentos, etapas y tiempos antes de radicar." %}</p>
+  <form method="get" class="mt-5 max-w-xl relative" role="search">
+    <label for="q" class="sr-only">{% translate "Buscar trámite" %}</label>
+    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true">search</span>
+    <input type="search" id="q" name="q" value="{{ query }}" placeholder="{% translate 'Buscar trámite…' %}"
+           class="w-full rounded-full bg-white text-ink pl-11 pr-4 py-3 focus:outline-none focus:ring-4 focus:ring-brand-300"
+           hx-get="{% url 'catalog:list' %}" hx-trigger="input changed delay:300ms, search" hx-target="#results" hx-push-url="true">
+  </form>
+</section>
 <div id="results" aria-live="polite">{% include "catalog/_results.html" %}</div>
 {% endblock %}

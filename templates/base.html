@@ -5,73 +5,174 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% translate "Trámite Claro" %}{% endblock %} · {% translate "Trámite Claro" %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0..1,0&display=block">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    /* Paleta inspirada en el verde institucional; sin logos ni marcas oficiales. */
+    @theme {
+      --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+      --color-brand-50: #e9f5ee;
+      --color-brand-100: #cde8d8;
+      --color-brand-200: #9fd2b5;
+      --color-brand-300: #69b68c;
+      --color-brand-400: #359a65;
+      --color-brand-500: #138149;
+      --color-brand-600: #026937;
+      --color-brand-700: #01582e;
+      --color-brand-800: #014725;
+      --color-brand-900: #01361c;
+      --color-ink: #1d1d1b;
+    }
+  </style>
   <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
   <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script>
+    // Tamaño de texto (accesibilidad): se recuerda en el navegador.
+    (function () {
+      var size = localStorage.getItem("tc-font-size");
+      if (size) document.documentElement.style.fontSize = size;
+    })();
+    function tcFontSize(delta) {
+      var current = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      var next = delta === 0 ? 16 : Math.min(22, Math.max(14, current + delta));
+      document.documentElement.style.fontSize = next + "px";
+      localStorage.setItem("tc-font-size", next + "px");
+    }
+  </script>
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-800 flex flex-col" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+<body class="min-h-screen bg-slate-50 text-ink font-sans flex flex-col" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
   <a href="#main" class="skip-link">{% translate "Saltar al contenido" %}</a>
-  <div class="bg-amber-100 text-amber-900 text-xs text-center py-1 px-2">
-    {% translate "PROTOTIPO ACADÉMICO – SIN VALIDEZ OFICIAL. Solo datos ficticios." %}
-  </div>
-  <header class="bg-teal-800 text-white">
-    <nav class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center gap-x-6 gap-y-2" aria-label="{% translate 'Navegación principal' %}">
-      <a href="{% url 'home' %}" class="font-bold text-lg tracking-tight">✓ {% translate "Trámite Claro" %}</a>
-      <div class="flex flex-wrap gap-4 text-sm">
-        {% if user.is_authenticated %}
-          {% if user.is_student %}
-            <a class="hover:underline" href="{% url 'requests:my_requests' %}">{% translate "Mis solicitudes" %}</a>
-          {% endif %}
-          {% if user.is_official or user.is_admin_role %}
-            <a class="hover:underline" href="{% url 'requests:inbox' %}">{% translate "Bandeja" %}</a>
-          {% endif %}
-          {% if user.is_admin_role %}
-            <a class="hover:underline" href="{% url 'metrics:dashboard' %}">{% translate "Indicadores" %}</a>
-            <a class="hover:underline" href="{% url 'admin:index' %}">{% translate "Administración" %}</a>
-          {% endif %}
-        {% endif %}
-        <a class="hover:underline" href="{% url 'catalog:list' %}">{% translate "Catálogo de trámites" %}</a>
+
+  {# Barra de utilidades #}
+  <div class="bg-brand-900 text-white text-xs">
+    <div class="max-w-6xl mx-auto px-4 py-1.5 flex flex-wrap items-center gap-x-5 gap-y-1">
+      <span class="flex items-center gap-1 font-semibold text-amber-200">
+        <span class="material-symbols-outlined text-base" aria-hidden="true">science</span>
+        {% translate "PROTOTIPO ACADÉMICO – SIN VALIDEZ OFICIAL. Solo datos ficticios." %}
+      </span>
+      <div class="ml-auto flex flex-wrap items-center gap-x-5 gap-y-1">
         <a class="hover:underline" href="{% url 'certificates:verify' %}">{% translate "Verificar certificado" %}</a>
-      </div>
-      <div class="ml-auto flex items-center gap-4 text-sm">
-        <form action="{% url 'set_language' %}" method="post" class="flex items-center gap-1">
+        <span class="flex items-center gap-1" role="group" aria-label="{% translate 'Tamaño del texto' %}">
+          <button type="button" onclick="tcFontSize(-1)" class="px-1 hover:underline" aria-label="{% translate 'Reducir texto' %}">A−</button>
+          <button type="button" onclick="tcFontSize(0)" class="px-1 hover:underline" aria-label="{% translate 'Texto normal' %}">A</button>
+          <button type="button" onclick="tcFontSize(1)" class="px-1 hover:underline" aria-label="{% translate 'Aumentar texto' %}">A+</button>
+        </span>
+        <form action="{% url 'set_language' %}" method="post" class="flex items-center">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.get_full_path }}">
           <label for="language" class="sr-only">{% translate "Idioma" %}</label>
-          <select id="language" name="language" onchange="this.form.submit()" class="bg-teal-900 rounded px-2 py-1 text-white">
-            <option value="es" {% if LANG == "es" %}selected{% endif %}>ES</option>
-            <option value="en" {% if LANG == "en" %}selected{% endif %}>EN</option>
+          <select id="language" name="language" onchange="this.form.submit()" class="bg-transparent border border-white/40 rounded px-1 py-0.5">
+            <option class="text-ink" value="es" {% if LANG == "es" %}selected{% endif %}>ES</option>
+            <option class="text-ink" value="en" {% if LANG == "en" %}selected{% endif %}>EN</option>
           </select>
         </form>
         {% if user.is_authenticated %}
-          <a href="{% url 'notifications:list' %}" class="relative" aria-label="{% translate 'Notificaciones' %}"
-             hx-get="{% url 'notifications:badge' %}" hx-trigger="every 30s" hx-target="#notif-badge" hx-swap="innerHTML">
-            🔔<span id="notif-badge">{% include "notifications/_badge.html" %}</span>
-          </a>
-          <span class="hidden sm:inline">{{ user.get_full_name|default:user.username }} · <span class="opacity-75">{{ user.get_role_display }}{% if user.department %} – {{ user.department.display_name }}{% endif %}</span></span>
           <form action="{% url 'accounts:logout' %}" method="post">{% csrf_token %}
-            <button class="underline">{% translate "Salir" %}</button>
+            <button class="uppercase font-semibold tracking-wide hover:underline">{% translate "Salir" %}</button>
           </form>
         {% else %}
-          <a class="underline" href="{% url 'accounts:login' %}">{% translate "Ingresar" %}</a>
+          <a class="uppercase font-semibold tracking-wide hover:underline" href="{% url 'accounts:login' %}">{% translate "Ingresar" %}</a>
         {% endif %}
       </div>
-    </nav>
+    </div>
+  </div>
+
+  {# Fila de identidad #}
+  <header class="bg-white border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center gap-4">
+      <a href="{% url 'home' %}" class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-white bg-brand-600 rounded-full p-2 text-3xl leading-none" aria-hidden="true">task_alt</span>
+        <span>
+          <span class="block text-2xl font-bold text-brand-600 leading-tight">{% translate "Trámite Claro" %}</span>
+          <span class="block text-xs text-slate-500 uppercase tracking-wider">{% translate "Trámites académicos de pregrado en línea" %}</span>
+        </span>
+      </a>
+      {% if user.is_authenticated %}
+      <div class="ml-auto flex items-center gap-4">
+        <a href="{% url 'notifications:list' %}" class="relative text-brand-600 hover:text-brand-800" aria-label="{% translate 'Notificaciones' %}"
+           hx-get="{% url 'notifications:badge' %}" hx-trigger="every 30s" hx-target="#notif-badge" hx-swap="innerHTML">
+          <span class="material-symbols-outlined text-3xl" aria-hidden="true">notifications</span>
+          <span id="notif-badge">{% include "notifications/_badge.html" %}</span>
+        </a>
+        <span class="flex items-center gap-2 text-sm">
+          <span class="material-symbols-outlined text-slate-400 text-3xl" aria-hidden="true">account_circle</span>
+          <span class="hidden sm:block leading-tight">
+            <span class="block font-semibold">{{ user.get_full_name|default:user.username }}</span>
+            <span class="block text-xs text-slate-500">{{ user.get_role_display }}{% if user.department %} · {{ user.department.display_name }}{% endif %}</span>
+          </span>
+        </span>
+      </div>
+      {% endif %}
+    </div>
   </header>
+
+  {# Menú principal #}
+  <nav class="bg-brand-600 text-white shadow" aria-label="{% translate 'Navegación principal' %}">
+    <div class="max-w-6xl mx-auto px-4 flex flex-wrap text-sm font-semibold">
+      {% with path=request.path %}
+      {% if user.is_authenticated %}
+        {% if user.is_student %}
+          {% url 'requests:my_requests' as u %}<a class="nav-link {% if path == u %}is-active{% endif %}" href="{{ u }}">{% translate "Mis solicitudes" %}</a>
+        {% endif %}
+        {% if user.is_official or user.is_admin_role %}
+          {% url 'requests:inbox' as u %}<a class="nav-link {% if path == u %}is-active{% endif %}" href="{{ u }}">{% translate "Bandeja" %}</a>
+        {% endif %}
+        {% if user.is_admin_role %}
+          {% url 'metrics:dashboard' as u %}<a class="nav-link {% if path == u %}is-active{% endif %}" href="{{ u }}">{% translate "Indicadores" %}</a>
+        {% endif %}
+      {% endif %}
+      {% url 'catalog:list' as u %}<a class="nav-link {% if path|slice:':10' == u|slice:':10' %}is-active{% endif %}" href="{{ u }}">{% translate "Catálogo de trámites" %}</a>
+      {% if user.is_authenticated %}
+        {% url 'notifications:list' as u %}<a class="nav-link {% if path == u %}is-active{% endif %}" href="{{ u }}">{% translate "Notificaciones" %}</a>
+      {% endif %}
+      {% if user.is_admin_role %}
+        <a class="nav-link" href="{% url 'admin:index' %}">{% translate "Administración" %}</a>
+      {% endif %}
+      {% endwith %}
+    </div>
+  </nav>
 
   <main id="main" class="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
     {% if messages %}
       <div class="space-y-2 mb-6" role="status">
         {% for message in messages %}
-          <div class="rounded-lg px-4 py-3 text-sm {% if message.tags == 'error' %}bg-rose-50 text-rose-800 border border-rose-200{% else %}bg-emerald-50 text-emerald-800 border border-emerald-200{% endif %}">{{ message }}</div>
+          <div class="rounded px-4 py-3 text-sm border-l-4 {% if message.tags == 'error' %}bg-rose-50 text-rose-800 border-rose-500{% else %}bg-brand-50 text-brand-800 border-brand-600{% endif %}">{{ message }}</div>
         {% endfor %}
       </div>
     {% endif %}
     {% block content %}{% endblock %}
   </main>
 
-  <footer class="text-xs text-slate-500 text-center py-6 border-t border-slate-200">
-    {% translate "Trámite Claro · Proyecto de curso de Ingeniería de Sistemas. No es un sistema oficial de la universidad." %}
+  <footer class="bg-ink text-slate-300 text-sm mt-8">
+    <div class="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3">
+      <div>
+        <p class="flex items-center gap-2 text-white text-lg font-bold">
+          <span class="material-symbols-outlined text-brand-300" aria-hidden="true">task_alt</span>{% translate "Trámite Claro" %}
+        </p>
+        <p class="mt-2">{% translate "Radica, rastrea y resuelve tus trámites académicos en línea, con certificados en español e inglés." %}</p>
+      </div>
+      <div>
+        <p class="text-white font-bold mb-3">{% translate "Servicios en línea" %}</p>
+        <ul class="space-y-2">
+          <li><a class="hover:text-white hover:underline" href="{% url 'catalog:list' %}">{% translate "Catálogo de trámites" %}</a></li>
+          <li><a class="hover:text-white hover:underline" href="{% url 'certificates:verify' %}">{% translate "Verificar certificado" %}</a></li>
+          {% if user.is_authenticated and user.is_student %}<li><a class="hover:text-white hover:underline" href="{% url 'requests:my_requests' %}">{% translate "Mis solicitudes" %}</a></li>{% endif %}
+        </ul>
+      </div>
+      <div>
+        <p class="text-white font-bold mb-3">{% translate "Sobre el prototipo" %}</p>
+        <ul class="space-y-2">
+          <li>{% translate "Proyecto de curso de Ingeniería de Sistemas." %}</li>
+          <li>{% translate "No es un sistema oficial de la universidad." %}</li>
+          <li>{% translate "Solo datos ficticios (Ley 1581 de 2012)." %}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <p class="max-w-6xl mx-auto px-4 py-4 text-xs text-slate-400">{% translate "Trámite Claro · Proyecto de curso de Ingeniería de Sistemas. No es un sistema oficial de la universidad." %}</p>
+    </div>
   </footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
 <li class="flex flex-wrap items-center justify-between gap-2">
-  <span><a class="font-mono text-teal-700 underline" href="{% url 'requests:detail' r.pk %}">{{ r.number }}</a> · {{ r.procedure.display_name }} · {{ r.current_stage.department.display_name }}</span>
+  <span><a class="font-mono text-brand-600 underline" href="{% url 'requests:detail' r.pk %}">{{ r.number }}</a> · {{ r.procedure.display_name }} · {{ r.current_stage.department.display_name }}</span>
   {% include "requests/_deadline.html" %}
 </li>

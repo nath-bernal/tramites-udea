@@ -15,12 +15,20 @@
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-  outline: 2px solid #0f766e;
+  outline: 2px solid #026937;
   outline-offset: 1px;
-  border-color: #0f766e;
+  border-color: #026937;
 }
 .form-field input[type="file"] { font-size: 0.9rem; }
 .form-field .errorlist { color: #be123c; font-size: 0.85rem; margin-top: 0.25rem; }
 .form-field .helptext { color: #64748b; font-size: 0.8rem; }
 .skip-link { position: absolute; left: -999px; }
 .skip-link:focus { left: 1rem; top: 1rem; z-index: 50; background: #fff; padding: 0.5rem 1rem; }
+
+/* Menú principal */
+.nav-link { padding: 0.8rem 1rem; border-bottom: 3px solid transparent; }
+.nav-link:hover { background: rgba(255, 255, 255, 0.1); }
+.nav-link.is-active { border-bottom-color: #fff; background: rgba(0, 0, 0, 0.12); }
+
+/* Iconos Material */
+.material-symbols-outlined { vertical-align: middle; }

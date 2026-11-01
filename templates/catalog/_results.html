@@ -1,14 +1,22 @@
 {% load i18n %}
 {% if procedures %}
-<div class="grid sm:grid-cols-2 gap-4">
+<div class="grid sm:grid-cols-2 gap-5">
   {% for procedure in procedures %}
-  <a href="{% url 'catalog:detail' procedure.code %}" class="block bg-white border border-slate-200 rounded-xl p-5 hover:border-teal-600 hover:shadow-sm transition">
-    <h2 class="font-semibold text-lg">{{ procedure.display_name }}</h2>
-    <p class="text-sm text-slate-600 mt-1">{{ procedure.display_description|truncatewords:28 }}</p>
-    <p class="text-xs text-slate-500 mt-3">
-      {% blocktranslate count n=procedure.stages.all|length %}{{ n }} etapa{% plural %}{{ n }} etapas{% endblocktranslate %}
-      · {% blocktranslate with days=procedure.estimated_days %}~{{ days }} días hábiles{% endblocktranslate %}
-    </p>
+  <a href="{% url 'catalog:detail' procedure.code %}" class="group flex flex-col bg-white border-t-4 border-brand-600 shadow-sm hover:shadow-md transition rounded-b-md p-6">
+    <span class="text-xs font-bold uppercase tracking-wider text-brand-600">
+      {% if procedure.issues_certificate %}{% translate "Certificados" %}{% else %}{% translate "Trámite académico" %}{% endif %}
+    </span>
+    <h2 class="font-bold text-xl mt-1 group-hover:text-brand-600">{{ procedure.display_name }}</h2>
+    <p class="text-sm text-slate-600 mt-2 flex-1">{{ procedure.display_description|truncatewords:28 }}</p>
+    <div class="flex items-center justify-between mt-5 text-sm">
+      <span class="text-slate-500 flex items-center gap-1">
+        <span class="material-symbols-outlined text-lg" aria-hidden="true">schedule</span>
+        {% blocktranslate count n=procedure.stages.all|length %}{{ n }} etapa{% plural %}{{ n }} etapas{% endblocktranslate %}
+        · {% blocktranslate with days=procedure.estimated_days %}~{{ days }} días hábiles{% endblocktranslate %}
+      </span>
+      <span class="flex items-center gap-1 font-semibold text-brand-600">{% translate "Ver trámite" %}
+        <span class="material-symbols-outlined transition group-hover:translate-x-1" aria-hidden="true">arrow_forward</span></span>
+    </div>
   </a>
   {% endfor %}
 </div>

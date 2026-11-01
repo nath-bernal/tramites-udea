@@ -1,13 +1,13 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}{% translate "Verificar certificado" %}{% endblock %}
 {% block content %}
-<div class="max-w-lg mx-auto bg-white rounded-xl border border-slate-200 p-8">
+<div class="max-w-lg mx-auto bg-white rounded-md border border-slate-200 p-8">
   <h1 class="text-2xl font-bold mb-2">{% translate "Verificar certificado" %}</h1>
   <p class="text-sm text-slate-600 mb-6">{% translate "Escribe el código impreso en el certificado o escanea su código QR." %}</p>
   <form method="get" class="form-field space-y-4">
     <label for="code" class="block text-sm font-medium">{% translate "Código de verificación" %}</label>
     <input type="text" id="code" name="code" placeholder="XXXX-XXXX-XXXX" required autocomplete="off" class="font-mono uppercase">
-    <button class="w-full bg-teal-700 hover:bg-teal-800 text-white rounded-lg py-2.5 font-medium">{% translate "Verificar" %}</button>
+    <button class="w-full bg-brand-600 hover:bg-brand-700 text-white rounded py-2.5 font-medium">{% translate "Verificar" %}</button>
   </form>
 </div>
 {% endblock %}

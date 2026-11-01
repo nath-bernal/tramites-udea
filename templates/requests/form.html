@@ -1,7 +1,7 @@
 {% extends "base.html" %}{% load i18n %}
 {% block title %}{{ procedure.display_name }}{% endblock %}
 {% block content %}
-<a href="{% if req %}{% url 'requests:my_requests' %}{% else %}{% url 'catalog:detail' procedure.code %}{% endif %}" class="text-sm text-teal-700 underline">← {% translate "Volver" %}</a>
+<a href="{% if req %}{% url 'requests:my_requests' %}{% else %}{% url 'catalog:detail' procedure.code %}{% endif %}" class="text-sm text-brand-600 underline">← {% translate "Volver" %}</a>
 <h1 class="text-3xl font-bold mt-2">{{ procedure.display_name }}</h1>
 <p class="text-slate-600 mb-6">
   {% if req.status == "NEEDS_CHANGES" %}{% blocktranslate with number=req.number %}Corrige tu solicitud {{ number }} y reenvíala.{% endblocktranslate %}
@@ -10,14 +10,14 @@
 </p>
 
 {% if last_comment and req.status == "NEEDS_CHANGES" %}
-<div class="bg-amber-50 border border-amber-300 rounded-xl p-4 mb-6">
+<div class="bg-amber-50 border border-amber-300 rounded-md p-4 mb-6">
   <p class="font-semibold text-amber-900">{% blocktranslate with dept=last_comment.stage.department.display_name %}Ajustes pedidos por {{ dept }}:{% endblocktranslate %}</p>
   <p class="text-amber-900 mt-1">{{ last_comment.comment }}</p>
 </div>
 {% endif %}
 
 <div class="grid lg:grid-cols-3 gap-6">
-<form method="post" enctype="multipart/form-data" class="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-6 space-y-6">
+<form method="post" enctype="multipart/form-data" class="lg:col-span-2 bg-white border border-slate-200 rounded-md p-6 space-y-6">
   {% csrf_token %}
   {% if form.non_field_errors %}<div class="text-sm text-rose-700">{{ form.non_field_errors }}</div>{% endif %}
   {% if form.data_fields %}
@@ -31,7 +31,7 @@
   <fieldset class="space-y-4">
     <legend class="font-semibold text-lg mb-2">{% translate "Documentos" %}</legend>
     {% for row in form.document_rows %}
-    <div class="form-field space-y-1 border border-slate-200 rounded-lg p-4">
+    <div class="form-field space-y-1 border border-slate-200 rounded p-4">
       <label for="{{ row.field.id_for_label }}" class="block text-sm font-medium">{{ row.doc.display_name }}
         {% if row.doc.is_required %}<span class="text-rose-600">* {% translate "obligatorio" %}</span>{% else %}<span class="text-slate-500">({% translate "opcional" %})</span>{% endif %}</label>
       {% if row.existing %}<p class="text-sm text-emerald-700">✓ {% translate "Cargado:" %} {{ row.existing.original_name }} <span class="text-slate-500">— {% translate "sube otro archivo para reemplazarlo" %}</span></p>{% endif %}
@@ -51,21 +51,21 @@
   {% endif %}
 
   <div class="flex flex-wrap gap-3 pt-2">
-    <button name="action" value="submit" class="bg-teal-700 hover:bg-teal-800 text-white rounded-lg px-5 py-2.5 font-medium">
+    <button name="action" value="submit" class="bg-brand-600 hover:bg-brand-700 text-white rounded px-5 py-2.5 font-medium">
       {% if req.status == "NEEDS_CHANGES" %}{% translate "Enviar ajustes" %}{% else %}{% translate "Radicar solicitud" %}{% endif %}</button>
     {% if not req or req.status == "DRAFT" %}
-    <button name="action" value="draft" class="border border-slate-300 bg-white hover:bg-slate-50 rounded-lg px-5 py-2.5">{% translate "Guardar borrador" %}</button>
+    <button name="action" value="draft" class="border border-slate-300 bg-white hover:bg-slate-50 rounded px-5 py-2.5">{% translate "Guardar borrador" %}</button>
     {% endif %}
   </div>
 </form>
 
-<aside class="bg-white border border-slate-200 rounded-xl p-5 h-fit">
+<aside class="bg-white border border-slate-200 rounded-md p-5 h-fit">
   <h2 class="font-semibold mb-3">{% translate "Antes de enviar, verifica:" %}</h2>
   <ul class="space-y-2 text-sm">
     {% for r in procedure.requirement_list %}<li class="flex gap-2"><span aria-hidden="true">☐</span>{{ r }}</li>{% endfor %}
   </ul>
   {% if missing %}
-  <div class="mt-4 text-sm text-rose-800 bg-rose-50 rounded-lg p-3">
+  <div class="mt-4 text-sm text-rose-800 bg-rose-50 rounded p-3">
     <p class="font-medium">{% translate "Documentos obligatorios pendientes:" %}</p>
     <ul class="list-disc pl-5">{% for doc in missing %}<li>{{ doc.display_name }}</li>{% endfor %}</ul>
   </div>
