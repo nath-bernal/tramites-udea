@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: Letter; margin: 2.5cm 2.2cm; }
+  body { font-family: "Helvetica", "Arial", sans-serif; color: #1e293b; font-size: 11.5pt; line-height: 1.6; }
+  .watermark {
+    position: fixed; top: 38%; left: -10%; width: 120%; text-align: center;
+    transform: rotate(-30deg); font-size: 34pt; font-weight: bold; color: rgba(190, 18, 60, 0.13);
+  }
+  .banner { border: 1px solid #be123c; color: #be123c; text-align: center; font-size: 8.5pt; padding: 4px; margin-bottom: 1.2cm; }
+  header { border-bottom: 2px solid #0f766e; padding-bottom: 8px; margin-bottom: 1cm; }
+  header .brand { color: #0f766e; font-weight: bold; font-size: 14pt; }
+  header .sub { font-size: 9pt; color: #64748b; }
+  h1 { text-align: center; font-size: 17pt; letter-spacing: 1px; margin: 0.6cm 0; text-transform: uppercase; }
+  .certifies { text-align: center; font-weight: bold; margin: 0.6cm 0; }
+  .body p { text-align: justify; }
+  footer { position: fixed; bottom: 0; left: 0; right: 0; border-top: 1px solid #cbd5e1; padding-top: 8px; font-size: 8.5pt; color: #475569; }
+  footer table { width: 100%; }
+  footer img { width: 2.6cm; height: 2.6cm; }
+  .code { font-family: "Courier New", monospace; font-size: 11pt; font-weight: bold; color: #0f172a; }
+</style>
+</head>
+<body>
+  <div class="watermark">PROTOTIPO ACADÉMICO – SIN VALIDEZ OFICIAL</div>
+  <div class="banner">PROTOTIPO ACADÉMICO – SIN VALIDEZ OFICIAL · ACADEMIC PROTOTYPE – NOT AN OFFICIAL DOCUMENT</div>
+  <header>
+    <div class="brand">✓ Trámite Claro</div>
+    <div class="sub">{% if lang == "en" %}Academic procedures platform (course prototype){% else %}Plataforma de trámites académicos (prototipo de curso){% endif %}</div>
+  </header>
+  <h1>{{ title }}</h1>
+  <div class="body">{{ body|safe }}</div>
+  <footer>
+    <table><tr>
+      <td>
+        {% if lang == "en" %}Verification code{% else %}Código de verificación{% endif %}: <span class="code">{{ code }}</span><br>
+        {% if lang == "en" %}Verify this document at{% else %}Verifique este documento en{% endif %}: {{ verify_url }}<br>
+        {% if lang == "en" %}Filing number{% else %}Radicado{% endif %}: {{ number }}
+      </td>
+      <td style="text-align:right"><img src="{{ qr }}" alt="QR"></td>
+    </tr></table>
+  </footer>
+</body>
+</html>

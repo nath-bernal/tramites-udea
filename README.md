@@ -190,3 +190,32 @@ Trabajar una fase a la vez. Al terminar cada fase: pruebas pasando, `ruff` limpi
 - Tiene pruebas de la lógica principal y de permisos.
 - Los textos de la interfaz están marcados para traducción.
 - No rompe fases anteriores (`pytest` en verde).
+
+---
+
+## 12. Estado del proyecto
+
+Las 7 fases del plan están implementadas. `pytest` pasa (63 pruebas) y `ruff` está limpio.
+
+| Fase | Qué quedó |
+|---|---|
+| 1. Base | Usuario personalizado con roles (`student`, `staff`, `admin`), dependencias, registro abierto solo para estudiantes, navegación por rol, `seed_demo` idempotente. |
+| 2. Catálogo y radicación | Catálogo con búsqueda (HTMX) y ficha paso a paso. Formulario dinámico según los campos y documentos configurados en `/admin`. Se puede guardar como borrador. Los archivos se validan por extensión, tamaño (5 MB) y contenido real, y se guardan con nombre aleatorio. |
+| 3. Flujo y seguimiento | `apps/requests/services.py` concentra todas las transiciones y crea un `RequestEvent` en cada una. Bandeja del funcionario filtrada por dependencia y etapa. Línea de tiempo con indicador de etapas y radicado `TC-AAAA-NNNNNN`. |
+| 4. Notificaciones | En la app (con contador que se actualiza cada 30 s) y por correo (en consola durante el desarrollo), en el idioma preferido de quien las recibe. |
+| 5. Certificados bilingües | Plantillas ES/EN editables en `/admin`. PDF con WeasyPrint, código no adivinable, QR y marca de agua. Página pública `/certificados/verificar/`. |
+| 6. Indicadores y plazos | Tablero con solicitudes por estado, tiempo promedio por trámite y por etapa, cuellos de botella y alertas, más exportación a CSV. Los plazos se cuentan en días hábiles. `python manage.py check_deadlines` avisa a las dependencias de las solicitudes vencidas (pensado para ejecutarse una vez al día). |
+| 7. Pulido | La interfaz es en español siempre, sin importar el idioma del navegador. Traducción completa al inglés disponible solo desde el selector ES/EN (se guarda como preferencia del usuario), enlace "saltar al contenido", etiquetas accesibles y regiones `aria-live`. Faltan las capturas para la exposición. |
+
+### Decisiones del equipo de desarrollo
+- `APROBADA` y `RECHAZADA` pasan automáticamente a `FINALIZADA` en la misma operación. Si el trámite emite certificado, este se genera antes de finalizar. Si la generación falla, se revierte toda la aprobación. El resultado queda en `Request.outcome`.
+- Los estados se guardan en inglés (`DRAFT`, `SUBMITTED`, `IN_REVIEW`, `NEEDS_CHANGES`, `APPROVED`, `REJECTED`, `FINALIZED`). En la interfaz se muestran en español o en inglés.
+- Mientras una solicitud está en `REQUIERE_AJUSTES` no aparece en ninguna bandeja. Ese tiempo no cuenta para el plazo de la etapa ni para los indicadores por etapa.
+- El administrador ve todas las solicitudes en modo de solo lectura. Solo los funcionarios de la dependencia de la etapa actual pueden decidir.
+- Además de los campos del borrador del modelo de datos se agregó `ProcedureField`, para que los campos del formulario de cada trámite sean configurables.
+- Los días hábiles no descuentan los festivos colombianos (simplificación del prototipo).
+- `seed_demo` crea además `estudiante2` y `estudiante3` (misma contraseña) y 7 solicitudes de ejemplo en distintos estados, con fechas pasadas para alimentar los indicadores. El certificado de `estudiante1` queda pendiente en Admisiones y Registro, para aprobarlo en vivo con `funcionario_registro`.
+
+### Notas de instalación en macOS
+- WeasyPrint necesita Pango: `brew install pango`. Si se usa el Python de python.org, hay que exportar `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` antes de `runserver`. Sin Pango la app funciona, pero no puede emitir certificados: la aprobación se revierte y se muestra un mensaje. Las pruebas reemplazan el PDF por uno falso, salvo una prueba de integración que se omite si falta Pango.
+- Si el repositorio está en una carpeta sincronizada con iCloud (por ejemplo `~/Documents`), hay que crear el entorno virtual fuera de ella (`python -m venv ~/.venvs/tramite-claro`). Si no, la importación de paquetes se vuelve extremadamente lenta.

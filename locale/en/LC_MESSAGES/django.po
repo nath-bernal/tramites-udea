@@ -1,0 +1,1282 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-01 18:30-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/accounts/admin.py:20 apps/accounts/admin.py:25 templates/base.html:7
+#: templates/base.html:19
+msgid "Trámite Claro"
+msgstr "Trámite Claro"
+
+#: apps/accounts/apps.py:8
+msgid "Cuentas"
+msgstr "Accounts"
+
+#: apps/accounts/forms.py:11
+msgid "Nombres"
+msgstr "First names"
+
+#: apps/accounts/forms.py:12
+msgid "Apellidos"
+msgstr "Last names"
+
+#: apps/accounts/forms.py:13
+msgid "Correo electrónico"
+msgstr "Email"
+
+#: apps/accounts/forms.py:14
+msgid "Documento de identidad"
+msgstr "ID number"
+
+#: apps/accounts/forms.py:15
+msgid "Programa académico"
+msgstr "Academic program"
+
+#: apps/accounts/models.py:9 apps/catalog/models.py:14
+#: apps/catalog/models.py:99
+msgid "nombre"
+msgstr "name"
+
+#: apps/accounts/models.py:10 apps/catalog/models.py:15
+#: apps/catalog/models.py:100
+msgid "nombre en inglés"
+msgstr "name in English"
+
+#: apps/accounts/models.py:13 apps/accounts/models.py:38
+#: apps/catalog/models.py:71
+msgid "dependencia"
+msgstr "office"
+
+#: apps/accounts/models.py:14
+msgid "dependencias"
+msgstr "offices"
+
+#: apps/accounts/models.py:29 templates/requests/_inbox_table.html:7
+msgid "Estudiante"
+msgstr "Student"
+
+#: apps/accounts/models.py:30
+msgid "Funcionario"
+msgstr "Staff member"
+
+#: apps/accounts/models.py:31
+msgid "Administrador"
+msgstr "Administrator"
+
+#: apps/accounts/models.py:33
+msgid "rol"
+msgstr "role"
+
+#: apps/accounts/models.py:34
+msgid "documento"
+msgstr "ID number"
+
+#: apps/accounts/models.py:35
+msgid "programa"
+msgstr "program"
+
+#: apps/accounts/models.py:43
+msgid "Solo para funcionarios."
+msgstr "Staff members only."
+
+#: apps/accounts/models.py:46
+msgid "idioma preferido"
+msgstr "preferred language"
+
+#: apps/accounts/models.py:51 apps/notifications/models.py:11
+msgid "usuario"
+msgstr "user"
+
+#: apps/accounts/models.py:52
+msgid "usuarios"
+msgstr "users"
+
+#: apps/accounts/views.py:31
+msgid "Cuenta creada. ¡Bienvenido a Trámite Claro!"
+msgstr "Account created. Welcome to Trámite Claro!"
+
+#: apps/catalog/apps.py:8 templates/catalog/detail.html:4
+msgid "Catálogo"
+msgstr "Catalog"
+
+#: apps/catalog/models.py:13
+msgid "código"
+msgstr "code"
+
+#: apps/catalog/models.py:16
+msgid "descripción"
+msgstr "description"
+
+#: apps/catalog/models.py:17
+msgid "descripción en inglés"
+msgstr "description in English"
+
+#: apps/catalog/models.py:19
+msgid "requisitos"
+msgstr "requirements"
+
+#: apps/catalog/models.py:19
+msgid "Un requisito por línea."
+msgstr "One requirement per line."
+
+#: apps/catalog/models.py:21
+msgid "requisitos en inglés"
+msgstr "requirements in English"
+
+#: apps/catalog/models.py:22
+msgid "tiempo estimado (días hábiles)"
+msgstr "estimated time (business days)"
+
+#: apps/catalog/models.py:24
+msgid "emite certificado"
+msgstr "issues certificate"
+
+#: apps/catalog/models.py:27
+msgid "Si está activo, al aprobarse se generan certificados PDF. El formulario debe tener los campos 'certificate_kind' y 'certificate_language'."
+msgstr "If enabled, PDF certificates are generated on approval. The form must include the 'certificate_kind' and 'certificate_language' fields."
+
+#: apps/catalog/models.py:31
+msgid "activo"
+msgstr "active"
+
+#: apps/catalog/models.py:32 apps/catalog/models.py:69
+#: apps/catalog/models.py:108 apps/catalog/models.py:150
+msgid "orden"
+msgstr "order"
+
+#: apps/catalog/models.py:35
+msgid "tipo de trámite"
+msgstr "procedure type"
+
+#: apps/catalog/models.py:36
+msgid "tipos de trámite"
+msgstr "procedure types"
+
+#: apps/catalog/models.py:67 apps/catalog/models.py:97
+#: apps/catalog/models.py:136 apps/requests/models.py:42
+msgid "trámite"
+msgstr "procedure"
+
+#: apps/catalog/models.py:74
+msgid "plazo (días hábiles)"
+msgstr "deadline (business days)"
+
+#: apps/catalog/models.py:78 apps/requests/models.py:172
+msgid "etapa"
+msgstr "stage"
+
+#: apps/catalog/models.py:79
+msgid "etapas"
+msgstr "stages"
+
+#: apps/catalog/models.py:101 apps/catalog/models.py:149
+#: templates/catalog/detail.html:30 templates/requests/form.html:36
+msgid "obligatorio"
+msgstr "required"
+
+#: apps/catalog/models.py:103
+msgid "formatos permitidos"
+msgstr "allowed formats"
+
+#: apps/catalog/models.py:106
+msgid "Extensiones separadas por coma. Soportadas: pdf, jpg, png."
+msgstr "Comma-separated extensions. Supported: pdf, jpg, png."
+
+#: apps/catalog/models.py:111 apps/requests/models.py:137
+msgid "documento requerido"
+msgstr "required document"
+
+#: apps/catalog/models.py:112
+msgid "documentos requeridos"
+msgstr "required documents"
+
+#: apps/catalog/models.py:131
+msgid "Texto corto"
+msgstr "Short text"
+
+#: apps/catalog/models.py:132
+msgid "Texto largo"
+msgstr "Long text"
+
+#: apps/catalog/models.py:133
+msgid "Lista de opciones"
+msgstr "Option list"
+
+#: apps/catalog/models.py:138
+msgid "clave"
+msgstr "key"
+
+#: apps/catalog/models.py:138
+msgid "Identificador interno, p. ej. 'reason'."
+msgstr "Internal identifier, e.g. 'reason'."
+
+#: apps/catalog/models.py:139
+msgid "etiqueta"
+msgstr "label"
+
+#: apps/catalog/models.py:140
+msgid "etiqueta en inglés"
+msgstr "label in English"
+
+#: apps/catalog/models.py:142 apps/certificates/models.py:25
+#: apps/certificates/models.py:70
+msgid "tipo"
+msgstr "type"
+
+#: apps/catalog/models.py:145
+msgid "opciones"
+msgstr "options"
+
+#: apps/catalog/models.py:147
+msgid "Solo para listas. Una opción por línea: valor|Etiqueta|Label in English"
+msgstr "Lists only. One option per line: value|Spanish label|English label"
+
+#: apps/catalog/models.py:153
+msgid "campo del formulario"
+msgstr "form field"
+
+#: apps/catalog/models.py:154
+msgid "campos del formulario"
+msgstr "form fields"
+
+#: apps/certificates/apps.py:8 templates/requests/detail.html:83
+msgid "Certificados"
+msgstr "Certificates"
+
+#: apps/certificates/models.py:9
+msgid "Certificado de estudios"
+msgstr "Enrollment certificate"
+
+#: apps/certificates/models.py:10
+msgid "Certificado de notas"
+msgstr "Grades certificate"
+
+#: apps/certificates/models.py:11
+msgid "Certificado de contenidos"
+msgstr "Course content certificate"
+
+#: apps/certificates/models.py:15 config/settings.py:94
+msgid "Español"
+msgstr "Spanish"
+
+#: apps/certificates/models.py:16 config/settings.py:94
+msgid "Inglés"
+msgstr "English"
+
+#: apps/certificates/models.py:26 apps/certificates/models.py:71
+msgid "idioma"
+msgstr "language"
+
+#: apps/certificates/models.py:27
+msgid "título"
+msgstr "title"
+
+#: apps/certificates/models.py:29
+msgid "cuerpo (HTML)"
+msgstr "body (HTML)"
+
+#: apps/certificates/models.py:31
+msgid "Plantilla de Django. Variables: {{ student_name }}, {{ document }}, {{ program }}, {{ number }}, {{ issued_date }}, {{ code }}."
+msgstr "Django template. Variables: {{ student_name }}, {{ document }}, {{ program }}, {{ number }}, {{ issued_date }}, {{ code }}."
+
+#: apps/certificates/models.py:35
+msgid "activa"
+msgstr "active"
+
+#: apps/certificates/models.py:38
+msgid "plantilla de certificado"
+msgstr "certificate template"
+
+#: apps/certificates/models.py:39
+msgid "plantillas de certificado"
+msgstr "certificate templates"
+
+#: apps/certificates/models.py:68 apps/notifications/models.py:19
+#: apps/requests/models.py:66 apps/requests/models.py:131
+#: apps/requests/models.py:160
+msgid "solicitud"
+msgstr "request"
+
+#: apps/certificates/models.py:73
+msgid "código de verificación"
+msgstr "verification code"
+
+#: apps/certificates/models.py:75
+msgid "archivo PDF"
+msgstr "PDF file"
+
+#: apps/certificates/models.py:76
+msgid "emitido el"
+msgstr "issued on"
+
+#: apps/certificates/models.py:79
+msgid "certificado emitido"
+msgstr "issued certificate"
+
+#: apps/certificates/models.py:80
+msgid "certificados emitidos"
+msgstr "issued certificates"
+
+#: apps/certificates/services.py:40
+msgid "La solicitud no indica un tipo e idioma de certificado válidos."
+msgstr "The request does not specify a valid certificate type and language."
+
+#: apps/certificates/services.py:83
+#, python-format
+msgid "No hay plantilla activa para %(kind)s en %(lang)s."
+msgstr "There is no active template for %(kind)s in %(lang)s."
+
+#: apps/metrics/apps.py:8 templates/base.html:29
+#: templates/metrics/dashboard.html:2
+msgid "Indicadores"
+msgstr "Metrics"
+
+#: apps/metrics/views.py:35
+msgid "Sección"
+msgstr "Section"
+
+#: apps/metrics/views.py:35
+msgid "Elemento"
+msgstr "Item"
+
+#: apps/metrics/views.py:35
+msgid "Cantidad"
+msgstr "Count"
+
+#: apps/metrics/views.py:35
+msgid "Promedio (días)"
+msgstr "Average (days)"
+
+#: apps/metrics/views.py:36
+msgid "Referencia (días)"
+msgstr "Reference (days)"
+
+#: apps/metrics/views.py:38 templates/requests/_inbox_table.html:7
+#: templates/requests/my_requests.html:12
+msgid "Estado"
+msgstr "Status"
+
+#: apps/metrics/views.py:41 templates/metrics/dashboard.html:25
+#: templates/requests/_inbox_table.html:7 templates/requests/inbox.html:10
+#: templates/requests/my_requests.html:12
+msgid "Trámite"
+msgstr "Procedure"
+
+#: apps/metrics/views.py:47 templates/requests/detail.html:30
+msgid "Etapa"
+msgstr "Stage"
+
+#: apps/notifications/apps.py:8 templates/base.html:47
+#: templates/notifications/list.html:2 templates/notifications/list.html:5
+msgid "Notificaciones"
+msgstr "Notifications"
+
+#: apps/notifications/models.py:21
+msgid "mensaje"
+msgstr "message"
+
+#: apps/notifications/models.py:22
+msgid "leída"
+msgstr "read"
+
+#: apps/notifications/models.py:23 apps/requests/models.py:183
+msgid "fecha"
+msgstr "date"
+
+#: apps/notifications/models.py:26
+msgid "notificación"
+msgstr "notification"
+
+#: apps/notifications/models.py:27
+msgid "notificaciones"
+msgstr "notifications"
+
+#: apps/notifications/services.py:23
+#, python-format
+msgid "Trámite Claro: %(number)s"
+msgstr "Trámite Claro: %(number)s"
+
+#: apps/notifications/services.py:25
+msgid "Trámite Claro (prototipo académico)"
+msgstr "Trámite Claro (academic prototype)"
+
+#: apps/notifications/services.py:54
+#, python-format
+msgid "Tu solicitud %(number)s de %(procedure)s fue radicada."
+msgstr "Your %(procedure)s request %(number)s was submitted."
+
+#: apps/notifications/services.py:57
+#, python-format
+msgid "Tu solicitud %(number)s volvió a revisión con tus ajustes."
+msgstr "Your request %(number)s is back in review with your changes."
+
+#: apps/notifications/services.py:59
+#, python-format
+msgid "Tu solicitud %(number)s pasó a revisión en %(department)s."
+msgstr "Your request %(number)s moved to review at %(department)s."
+
+#: apps/notifications/services.py:62
+#, python-format
+msgid "Tu solicitud %(number)s requiere ajustes: %(comment)s"
+msgstr "Your request %(number)s requires changes: %(comment)s"
+
+#: apps/notifications/services.py:68
+#, python-format
+msgid "Tu solicitud %(number)s fue aprobada. Ya puedes descargar tus certificados."
+msgstr "Your request %(number)s was approved. You can now download your certificates."
+
+#: apps/notifications/services.py:73
+#, python-format
+msgid "Tu solicitud %(number)s fue aprobada."
+msgstr "Your request %(number)s was approved."
+
+#: apps/notifications/services.py:74
+#, python-format
+msgid "Tu solicitud %(number)s fue rechazada."
+msgstr "Your request %(number)s was rejected."
+
+#: apps/notifications/services.py:83
+#, python-format
+msgid "Nueva solicitud %(number)s de %(procedure)s en tu bandeja."
+msgstr "New %(procedure)s request %(number)s in your inbox."
+
+#: apps/notifications/services.py:96
+#, python-format
+msgid "La solicitud %(number)s superó el plazo de su etapa (vencía el %(due)s)."
+msgstr "Request %(number)s exceeded its stage deadline (due %(due)s)."
+
+#: apps/requests/apps.py:8
+msgid "Solicitudes"
+msgstr "Requests"
+
+#: apps/requests/forms.py:31
+#, python-format
+msgid "Formatos: %(formats)s. Máximo 5 MB."
+msgstr "Formats: %(formats)s. 5 MB max."
+
+#: apps/requests/forms.py:79
+msgid "Aprobar"
+msgstr "Approve"
+
+#: apps/requests/forms.py:80 templates/requests/detail.html:74
+msgid "Pedir ajustes"
+msgstr "Request changes"
+
+#: apps/requests/forms.py:81 templates/requests/detail.html:75
+msgid "Rechazar"
+msgstr "Reject"
+
+#: apps/requests/forms.py:85
+msgid "Comentario"
+msgstr "Comment"
+
+#: apps/requests/forms.py:88
+msgid "Obligatorio para rechazar o pedir ajustes."
+msgstr "Required to reject or request changes."
+
+#: apps/requests/models.py:15 templates/requests/detail.html:8
+msgid "Borrador"
+msgstr "Draft"
+
+#: apps/requests/models.py:16
+msgid "Radicada"
+msgstr "Submitted"
+
+#: apps/requests/models.py:17
+msgid "En revisión"
+msgstr "In review"
+
+#: apps/requests/models.py:18
+msgid "Requiere ajustes"
+msgstr "Changes requested"
+
+#: apps/requests/models.py:19 apps/requests/models.py:29
+msgid "Aprobada"
+msgstr "Approved"
+
+#: apps/requests/models.py:20 apps/requests/models.py:30
+msgid "Rechazada"
+msgstr "Rejected"
+
+#: apps/requests/models.py:21
+msgid "Finalizada"
+msgstr "Closed"
+
+#: apps/requests/models.py:34
+msgid "radicado"
+msgstr "filing number"
+
+#: apps/requests/models.py:39
+msgid "estudiante"
+msgstr "student"
+
+#: apps/requests/models.py:45
+msgid "estado"
+msgstr "status"
+
+#: apps/requests/models.py:48
+msgid "resultado"
+msgstr "outcome"
+
+#: apps/requests/models.py:56
+msgid "etapa actual"
+msgstr "current stage"
+
+#: apps/requests/models.py:58
+msgid "datos del formulario"
+msgstr "form data"
+
+#: apps/requests/models.py:59
+msgid "creada"
+msgstr "created"
+
+#: apps/requests/models.py:60
+msgid "actualizada"
+msgstr "updated"
+
+#: apps/requests/models.py:61
+msgid "radicada el"
+msgstr "submitted on"
+
+#: apps/requests/models.py:62
+msgid "ingreso a la etapa"
+msgstr "entered stage on"
+
+#: apps/requests/models.py:63
+msgid "resuelta el"
+msgstr "resolved on"
+
+#: apps/requests/models.py:67
+msgid "solicitudes"
+msgstr "requests"
+
+#: apps/requests/models.py:71
+#, python-format
+msgid "Borrador #%(id)s"
+msgstr "Draft #%(id)s"
+
+#: apps/requests/models.py:139
+msgid "archivo"
+msgstr "file"
+
+#: apps/requests/models.py:140
+msgid "nombre original"
+msgstr "original name"
+
+#: apps/requests/models.py:141
+msgid "cargado el"
+msgstr "uploaded on"
+
+#: apps/requests/models.py:144
+msgid "documento de la solicitud"
+msgstr "request document"
+
+#: apps/requests/models.py:145
+msgid "documentos de la solicitud"
+msgstr "request documents"
+
+#: apps/requests/models.py:163
+msgid "estado anterior"
+msgstr "previous status"
+
+#: apps/requests/models.py:165
+msgid "estado nuevo"
+msgstr "new status"
+
+#: apps/requests/models.py:180
+msgid "actor"
+msgstr "actor"
+
+#: apps/requests/models.py:182
+msgid "comentario"
+msgstr "comment"
+
+#: apps/requests/models.py:186
+msgid "evento"
+msgstr "event"
+
+#: apps/requests/models.py:187
+msgid "eventos"
+msgstr "events"
+
+#: apps/requests/services.py:79
+msgid "La solicitud ya no se puede editar."
+msgstr "The request can no longer be edited."
+
+#: apps/requests/services.py:86
+msgid "Este trámite no está disponible."
+msgstr "This procedure is not available."
+
+#: apps/requests/services.py:100
+msgid "El documento no pertenece a este trámite."
+msgstr "The document does not belong to this procedure."
+
+#: apps/requests/services.py:117
+msgid "Solo se pueden eliminar borradores."
+msgstr "Only drafts can be deleted."
+
+#: apps/requests/services.py:129
+#, python-format
+msgid "No se puede pasar de «%(from)s» a «%(to)s»."
+msgstr "Cannot change from “%(from)s” to “%(to)s”."
+
+#: apps/requests/services.py:161
+#, python-format
+msgid "Faltan documentos obligatorios: %(docs)s."
+msgstr "Required documents are missing: %(docs)s."
+
+#: apps/requests/services.py:173
+msgid "Debes escribir un comentario para el estudiante."
+msgstr "You must write a comment for the student."
+
+#: apps/requests/services.py:181
+msgid "La solicitud ya fue radicada."
+msgstr "The request was already submitted."
+
+#: apps/requests/services.py:185
+msgid "El trámite no tiene etapas configuradas."
+msgstr "The procedure has no stages configured."
+
+#: apps/requests/services.py:201
+msgid "La solicitud no tiene ajustes pendientes."
+msgstr "The request has no pending changes."
+
+#: apps/requests/services.py:258
+#, python-format
+msgid "Certificados emitidos: %(langs)s."
+msgstr "Certificates issued: %(langs)s."
+
+#: apps/requests/validators.py:25
+#, python-format
+msgid "Formato no permitido. Formatos aceptados: %(formats)s."
+msgstr "Format not allowed. Accepted formats: %(formats)s."
+
+#: apps/requests/validators.py:30
+#, python-format
+msgid "El archivo pesa %(size)s; el máximo es %(max)s."
+msgstr "The file is %(size)s; the maximum is %(max)s."
+
+#: apps/requests/validators.py:40
+msgid "El contenido del archivo no corresponde a su extensión."
+msgstr "The file content does not match its extension."
+
+#: apps/requests/views.py:38
+msgid "Borrador guardado."
+msgstr "Draft saved."
+
+#: apps/requests/views.py:44
+#, python-format
+msgid "Solicitud radicada con el número %(number)s."
+msgstr "Request submitted with number %(number)s."
+
+#: apps/requests/views.py:48
+msgid "Ajustes enviados. Tu solicitud volvió a revisión."
+msgstr "Changes sent. Your request is back in review."
+
+#: apps/requests/views.py:105
+msgid "Borrador eliminado."
+msgstr "Draft deleted."
+
+#: apps/requests/views.py:153
+msgid "Acción no válida."
+msgstr "Invalid action."
+
+#: apps/requests/views.py:169
+#, python-format
+msgid "No se pudo generar el PDF del certificado: %(e)s"
+msgstr "Could not generate the certificate PDF: %(e)s"
+
+#: apps/requests/views.py:172
+msgid "Etapa aprobada."
+msgstr "Stage approved."
+
+#: apps/requests/views.py:173
+msgid "Solicitud rechazada."
+msgstr "Request rejected."
+
+#: apps/requests/views.py:174
+msgid "Se pidieron ajustes al estudiante."
+msgstr "Changes were requested from the student."
+
+#: templates/403.html:2 templates/403.html:4
+msgid "Acceso denegado"
+msgstr "Access denied"
+
+#: templates/403.html:5
+msgid "No tienes permiso para ver esta página."
+msgstr "You do not have permission to view this page."
+
+#: templates/404.html:2 templates/404.html:4
+msgid "No encontrado"
+msgstr "Not found"
+
+#: templates/404.html:5
+msgid "La página que buscas no existe o no tienes acceso a ella."
+msgstr "The page you are looking for does not exist or you do not have access to it."
+
+#: templates/accounts/login.html:2 templates/accounts/login.html:5
+#: templates/accounts/login.html:12 templates/base.html:56
+msgid "Ingresar"
+msgstr "Sign in"
+
+#: templates/accounts/login.html:6
+msgid "Radica y sigue tus trámites académicos en línea."
+msgstr "Submit and track your academic procedures online."
+
+#: templates/accounts/login.html:14
+msgid "¿Eres estudiante y no tienes cuenta?"
+msgstr "Are you a student without an account?"
+
+#: templates/accounts/login.html:14
+msgid "Regístrate"
+msgstr "Sign up"
+
+#: templates/accounts/login.html:16
+msgid "Usuarios de demostración"
+msgstr "Demo users"
+
+#: templates/accounts/login.html:17
+msgid "contraseña"
+msgstr "password"
+
+#: templates/accounts/register.html:2 templates/accounts/register.html:5
+msgid "Registro de estudiante"
+msgstr "Student sign-up"
+
+#: templates/accounts/register.html:6
+msgid "Usa solo datos ficticios: esto es un prototipo académico."
+msgstr "Use fictitious data only: this is an academic prototype."
+
+#: templates/accounts/register.html:10
+msgid "Crear cuenta"
+msgstr "Create account"
+
+#: templates/base.html:13
+msgid "Saltar al contenido"
+msgstr "Skip to content"
+
+#: templates/base.html:15
+msgid "PROTOTIPO ACADÉMICO – SIN VALIDEZ OFICIAL. Solo datos ficticios."
+msgstr "ACADEMIC PROTOTYPE – NOT OFFICIAL. Fictitious data only."
+
+#: templates/base.html:18
+msgid "Navegación principal"
+msgstr "Main navigation"
+
+#: templates/base.html:23 templates/requests/my_requests.html:2
+#: templates/requests/my_requests.html:5
+msgid "Mis solicitudes"
+msgstr "My requests"
+
+#: templates/base.html:26 templates/requests/inbox.html:2
+msgid "Bandeja"
+msgstr "Inbox"
+
+#: templates/base.html:30
+msgid "Administración"
+msgstr "Administration"
+
+#: templates/base.html:33 templates/catalog/list.html:2
+#: templates/catalog/list.html:4
+msgid "Catálogo de trámites"
+msgstr "Procedure catalog"
+
+#: templates/base.html:34 templates/certificates/verify.html:2
+#: templates/certificates/verify.html:5
+msgid "Verificar certificado"
+msgstr "Verify certificate"
+
+#: templates/base.html:40
+msgid "Idioma"
+msgstr "Language"
+
+#: templates/base.html:53
+msgid "Salir"
+msgstr "Sign out"
+
+#: templates/base.html:74
+msgid "Trámite Claro · Proyecto de curso de Ingeniería de Sistemas. No es un sistema oficial de la universidad."
+msgstr "Trámite Claro · Systems Engineering course project. Not an official university system."
+
+#: templates/catalog/_results.html:9
+#, python-format
+msgid "%(n)s etapa"
+msgid_plural "%(n)s etapas"
+msgstr[0] "%(n)s stage"
+msgstr[1] "%(n)s stages"
+
+#: templates/catalog/_results.html:10
+#, python-format
+msgid "~%(days)s días hábiles"
+msgstr "~%(days)s business days"
+
+#: templates/catalog/_results.html:16
+msgid "No hay trámites que coincidan con la búsqueda."
+msgstr "No procedures match your search."
+
+#: templates/catalog/detail.html:11
+msgid "Iniciar trámite"
+msgstr "Start procedure"
+
+#: templates/catalog/detail.html:13
+msgid "Ingresa para iniciar"
+msgstr "Sign in to start"
+
+#: templates/catalog/detail.html:19
+msgid "Requisitos"
+msgstr "Requirements"
+
+#: templates/catalog/detail.html:22
+msgid "Sin requisitos adicionales."
+msgstr "No additional requirements."
+
+#: templates/catalog/detail.html:25 templates/requests/detail.html:106
+#: templates/requests/form.html:32
+msgid "Documentos"
+msgstr "Documents"
+
+#: templates/catalog/detail.html:30 templates/requests/form.html:36
+msgid "opcional"
+msgstr "optional"
+
+#: templates/catalog/detail.html:33
+msgid "No necesitas adjuntar documentos."
+msgstr "No documents needed."
+
+#: templates/catalog/detail.html:36
+msgid "Paso a paso"
+msgstr "Step by step"
+
+#: templates/catalog/detail.html:38
+msgid "Radicas en línea con tus documentos."
+msgstr "You submit online with your documents."
+
+#: templates/catalog/detail.html:41
+#, python-format
+msgid "Revisión de %(dept)s (plazo: %(days)s días hábiles)"
+msgstr "Review by %(dept)s (deadline: %(days)s business days)"
+
+#: templates/catalog/detail.html:43
+msgid "Descargas tu certificado en PDF (español y/o inglés)."
+msgstr "You download your PDF certificate (Spanish and/or English)."
+
+#: templates/catalog/detail.html:43
+msgid "Recibes la respuesta en la app y por correo."
+msgstr "You get the answer in the app and by email."
+
+#: templates/catalog/detail.html:45
+#, python-format
+msgid "Tiempo estimado: %(days)s días hábiles."
+msgstr "Estimated time: %(days)s business days."
+
+#: templates/catalog/list.html:5
+msgid "Consulta requisitos, documentos, etapas y tiempos antes de radicar."
+msgstr "Check requirements, documents, stages and times before submitting."
+
+#: templates/catalog/list.html:7
+msgid "Buscar trámite"
+msgstr "Search procedure"
+
+#: templates/catalog/list.html:8
+msgid "Buscar trámite…"
+msgstr "Search procedure…"
+
+#: templates/certificates/verify.html:6
+msgid "Escribe el código impreso en el certificado o escanea su código QR."
+msgstr "Type the code printed on the certificate or scan its QR code."
+
+#: templates/certificates/verify.html:8
+msgid "Código de verificación"
+msgstr "Verification code"
+
+#: templates/certificates/verify.html:10
+msgid "Verificar"
+msgstr "Verify"
+
+#: templates/certificates/verify_result.html:2
+msgid "Verificación de certificado"
+msgstr "Certificate verification"
+
+#: templates/certificates/verify_result.html:7
+msgid "Certificado válido"
+msgstr "Valid certificate"
+
+#: templates/certificates/verify_result.html:9
+msgid "Código"
+msgstr "Code"
+
+#: templates/certificates/verify_result.html:10
+msgid "Tipo"
+msgstr "Type"
+
+#: templates/certificates/verify_result.html:11
+msgid "Titular"
+msgstr "Holder"
+
+#: templates/certificates/verify_result.html:12
+msgid "Programa"
+msgstr "Program"
+
+#: templates/certificates/verify_result.html:13
+#: templates/requests/_inbox_table.html:7
+#: templates/requests/my_requests.html:12
+msgid "Radicado"
+msgstr "Filing number"
+
+#: templates/certificates/verify_result.html:14
+msgid "Emitido el"
+msgstr "Issued on"
+
+#: templates/certificates/verify_result.html:16
+msgid "Prototipo académico: este certificado no tiene validez oficial."
+msgstr "Academic prototype: this certificate has no official validity."
+
+#: templates/certificates/verify_result.html:20
+msgid "Certificado no encontrado"
+msgstr "Certificate not found"
+
+#: templates/certificates/verify_result.html:21
+#, python-format
+msgid "No existe ningún certificado con el código <span class=\"font-mono\">%(code)s</span>. Revisa que lo hayas escrito bien."
+msgstr "There is no certificate with code <span class=\"font-mono\">%(code)s</span>. Check that you typed it correctly."
+
+#: templates/certificates/verify_result.html:24
+msgid "Verificar otro código"
+msgstr "Verify another code"
+
+#: templates/metrics/dashboard.html:6
+msgid "Tablero de indicadores"
+msgstr "Metrics dashboard"
+
+#: templates/metrics/dashboard.html:7
+msgid "Calculado a partir del historial de cada solicitud."
+msgstr "Calculated from each request's history."
+
+#: templates/metrics/dashboard.html:9
+msgid "Exportar CSV"
+msgstr "Export CSV"
+
+#: templates/metrics/dashboard.html:12
+msgid "Solicitudes por estado"
+msgstr "Requests by status"
+
+#: templates/metrics/dashboard.html:23
+msgid "Tiempo promedio por trámite"
+msgstr "Average time per procedure"
+
+#: templates/metrics/dashboard.html:25
+msgid "Activas"
+msgstr "Active"
+
+#: templates/metrics/dashboard.html:25
+msgid "Resueltas"
+msgstr "Resolved"
+
+#: templates/metrics/dashboard.html:25
+msgid "Promedio"
+msgstr "Average"
+
+#: templates/metrics/dashboard.html:25
+msgid "Estimado"
+msgstr "Estimated"
+
+#: templates/metrics/dashboard.html:38
+msgid "Promedio en días calendario desde la radicación hasta la resolución. Estimado en días hábiles."
+msgstr "Average in calendar days from submission to resolution. Estimate in business days."
+
+#: templates/metrics/dashboard.html:42
+msgid "Tiempo promedio por etapa"
+msgstr "Average time per stage"
+
+#: templates/metrics/dashboard.html:55
+msgid "Promedio de días en la etapa / plazo configurado. En rojo, etapas que superan su plazo."
+msgstr "Average days in stage / configured deadline. Stages over their deadline are shown in red."
+
+#: templates/metrics/dashboard.html:56
+msgid "Aún no hay etapas completadas."
+msgstr "No stages completed yet."
+
+#: templates/metrics/dashboard.html:62
+msgid "Cuellos de botella"
+msgstr "Bottlenecks"
+
+#: templates/metrics/dashboard.html:66
+#, python-format
+msgid "%(dept)s en %(proc)s: %(avg)s días en promedio (plazo %(limit)s)."
+msgstr "%(dept)s in %(proc)s: %(avg)s days on average (deadline %(limit)s)."
+
+#: templates/metrics/dashboard.html:69
+msgid "Ninguna etapa supera su plazo en promedio."
+msgstr "No stage exceeds its deadline on average."
+
+#: templates/metrics/dashboard.html:73
+msgid "Alertas de plazo"
+msgstr "Deadline alerts"
+
+#: templates/metrics/dashboard.html:79
+msgid "No hay solicitudes vencidas ni por vencer."
+msgstr "No overdue or soon-due requests."
+
+#: templates/notifications/list.html:8
+msgid "Marcar todas como leídas"
+msgstr "Mark all as read"
+
+#: templates/notifications/list.html:20
+msgid "sin leer"
+msgstr "unread"
+
+#: templates/notifications/list.html:27
+msgid "No tienes notificaciones."
+msgstr "You have no notifications."
+
+#: templates/requests/_deadline.html:1
+msgid "Vencida"
+msgstr "Overdue"
+
+#: templates/requests/_deadline.html:1 templates/requests/inbox.html:20
+msgid "Por vencer"
+msgstr "Due soon"
+
+#: templates/requests/_deadline.html:1 templates/requests/inbox.html:21
+msgid "A tiempo"
+msgstr "On time"
+
+#: templates/requests/_inbox_table.html:2
+#, python-format
+msgid "%(n)s solicitud superó su plazo."
+msgid_plural "%(n)s solicitudes superaron su plazo."
+msgstr[0] "%(n)s request is past its deadline."
+msgstr[1] "%(n)s requests are past their deadline."
+
+#: templates/requests/_inbox_table.html:7
+msgid "Dependencia"
+msgstr "Office"
+
+#: templates/requests/_inbox_table.html:7
+msgid "En la etapa"
+msgstr "In stage"
+
+#: templates/requests/_inbox_table.html:7 templates/requests/inbox.html:16
+msgid "Plazo"
+msgstr "Deadline"
+
+#: templates/requests/_inbox_table.html:17
+#, python-format
+msgid "%(n)s día"
+msgid_plural "%(n)s días"
+msgstr[0] "%(n)s day"
+msgstr[1] "%(n)s days"
+
+#: templates/requests/_inbox_table.html:25
+msgid "No hay solicitudes pendientes. 🎉"
+msgstr "No pending requests. 🎉"
+
+#: templates/requests/detail.html:5 templates/requests/form.html:4
+msgid "Volver"
+msgstr "Back"
+
+#: templates/requests/detail.html:20
+msgid "La dependencia pidió ajustes a tu solicitud."
+msgstr "The office requested changes to your request."
+
+#: templates/requests/detail.html:21
+msgid "Corregir ahora"
+msgstr "Fix now"
+
+#: templates/requests/detail.html:26
+msgid "Etapas del trámite"
+msgstr "Procedure stages"
+
+#: templates/requests/detail.html:31
+msgid "completada"
+msgstr "completed"
+
+#: templates/requests/detail.html:31
+msgid "en curso"
+msgstr "in progress"
+
+#: templates/requests/detail.html:31
+msgid "rechazada"
+msgstr "rejected"
+
+#: templates/requests/detail.html:31
+msgid "no aplica"
+msgstr "not applicable"
+
+#: templates/requests/detail.html:31
+msgid "pendiente"
+msgstr "pending"
+
+#: templates/requests/detail.html:40
+msgid "Línea de tiempo"
+msgstr "Timeline"
+
+#: templates/requests/detail.html:43
+#, python-format
+msgid "Ahora en <strong>%(dept)s</strong> · %(days)s días en esta etapa · %(total)s días desde la radicación."
+msgstr "Now at <strong>%(dept)s</strong> · %(days)s days in this stage · %(total)s days since submission."
+
+#: templates/requests/detail.html:58
+msgid "La solicitud aún no ha sido radicada."
+msgstr "The request has not been submitted yet."
+
+#: templates/requests/detail.html:65
+msgid "Decisión de la dependencia"
+msgstr "Office decision"
+
+#: templates/requests/detail.html:73
+msgid "Aprobar etapa"
+msgstr "Approve stage"
+
+#: templates/requests/detail.html:73
+msgid "Aprobar y finalizar"
+msgstr "Approve and close"
+
+#: templates/requests/detail.html:75
+msgid "¿Rechazar la solicitud? Esta acción la finaliza."
+msgstr "Reject the request? This will close it."
+
+#: templates/requests/detail.html:96
+msgid "Datos"
+msgstr "Details"
+
+#: templates/requests/detail.html:101
+msgid "Radicada el"
+msgstr "Submitted on"
+
+#: templates/requests/detail.html:114
+msgid "Sin documentos adjuntos."
+msgstr "No attached documents."
+
+#: templates/requests/form.html:7
+#, python-format
+msgid "Corrige tu solicitud %(number)s y reenvíala."
+msgstr "Fix your request %(number)s and resubmit it."
+
+#: templates/requests/form.html:8
+msgid "Borrador guardado. Completa los datos y radica cuando esté listo."
+msgstr "Draft saved. Complete the details and submit when ready."
+
+#: templates/requests/form.html:9
+msgid "Completa el formulario. Puedes guardar un borrador y radicar después."
+msgstr "Fill in the form. You can save a draft and submit later."
+
+#: templates/requests/form.html:14
+#, python-format
+msgid "Ajustes pedidos por %(dept)s:"
+msgstr "Changes requested by %(dept)s:"
+
+#: templates/requests/form.html:25
+msgid "Datos de la solicitud"
+msgstr "Request details"
+
+#: templates/requests/form.html:37
+msgid "Cargado:"
+msgstr "Uploaded:"
+
+#: templates/requests/form.html:37
+msgid "sube otro archivo para reemplazarlo"
+msgstr "upload another file to replace it"
+
+#: templates/requests/form.html:48
+msgid "Respuesta para la dependencia (opcional)"
+msgstr "Reply to the office (optional)"
+
+#: templates/requests/form.html:55
+msgid "Enviar ajustes"
+msgstr "Send changes"
+
+#: templates/requests/form.html:55
+msgid "Radicar solicitud"
+msgstr "Submit request"
+
+#: templates/requests/form.html:57
+msgid "Guardar borrador"
+msgstr "Save draft"
+
+#: templates/requests/form.html:63
+msgid "Antes de enviar, verifica:"
+msgstr "Before submitting, check:"
+
+#: templates/requests/form.html:69
+msgid "Documentos obligatorios pendientes:"
+msgstr "Required documents pending:"
+
+#: templates/requests/form.html:74
+msgid "¿Eliminar este borrador?"
+msgstr "Delete this draft?"
+
+#: templates/requests/form.html:75
+msgid "Eliminar borrador"
+msgstr "Delete draft"
+
+#: templates/requests/inbox.html:4
+msgid "Bandeja de solicitudes"
+msgstr "Request inbox"
+
+#: templates/requests/inbox.html:6
+msgid "Todas las solicitudes activas (vista de administrador, solo lectura)."
+msgstr "All active requests (administrator view, read-only)."
+
+#: templates/requests/inbox.html:7
+#, python-format
+msgid "Solicitudes en la etapa de %(dept)s, de la más antigua a la más reciente."
+msgstr "Requests at the %(dept)s stage, oldest first."
+
+#: templates/requests/inbox.html:12 templates/requests/inbox.html:18
+msgid "Todos"
+msgstr "All"
+
+#: templates/requests/inbox.html:19
+msgid "Vencidas"
+msgstr "Overdue"
+
+#: templates/requests/inbox.html:24
+msgid "Filtrar"
+msgstr "Filter"
+
+#: templates/requests/my_requests.html:6
+msgid "Nuevo trámite"
+msgstr "New procedure"
+
+#: templates/requests/my_requests.html:12
+msgid "Dependencia actual"
+msgstr "Current office"
+
+#: templates/requests/my_requests.html:12
+msgid "Días"
+msgstr "Days"
+
+#: templates/requests/my_requests.html:23
+msgid "Continuar"
+msgstr "Continue"
+
+#: templates/requests/my_requests.html:23
+msgid "Corregir"
+msgstr "Fix"
+
+#: templates/requests/my_requests.html:24
+msgid "Ver seguimiento"
+msgstr "View tracking"
+
+#: templates/requests/my_requests.html:33
+msgid "Aún no tienes solicitudes."
+msgstr "You have no requests yet."
+
+#: templates/requests/my_requests.html:34
+msgid "Explora el catálogo de trámites"
+msgstr "Browse the procedure catalog"

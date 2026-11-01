@@ -1,0 +1,27 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Bandeja" %}{% endblock %}
+{% block content %}
+<h1 class="text-3xl font-bold">{% translate "Bandeja de solicitudes" %}</h1>
+<p class="text-slate-600 mb-6">
+  {% if user.is_admin_role %}{% translate "Todas las solicitudes activas (vista de administrador, solo lectura)." %}
+  {% else %}{% blocktranslate with dept=user.department.display_name %}Solicitudes en la etapa de {{ dept }}, de la más antigua a la más reciente.{% endblocktranslate %}{% endif %}
+</p>
+<form method="get" class="form-field flex flex-wrap gap-3 mb-4" hx-get="{% url 'requests:inbox' %}" hx-trigger="change" hx-target="#inbox-table" hx-push-url="true">
+  <label class="text-sm">{% translate "Trámite" %}
+    <select name="procedure" class="mt-1">
+      <option value="">{% translate "Todos" %}</option>
+      {% for p in procedures %}<option value="{{ p.code }}" {% if p.code == selected_procedure %}selected{% endif %}>{{ p.display_name }}</option>{% endfor %}
+    </select>
+  </label>
+  <label class="text-sm">{% translate "Plazo" %}
+    <select name="deadline" class="mt-1">
+      <option value="">{% translate "Todos" %}</option>
+      <option value="overdue" {% if selected_deadline == "overdue" %}selected{% endif %}>{% translate "Vencidas" %}</option>
+      <option value="due_soon" {% if selected_deadline == "due_soon" %}selected{% endif %}>{% translate "Por vencer" %}</option>
+      <option value="on_time" {% if selected_deadline == "on_time" %}selected{% endif %}>{% translate "A tiempo" %}</option>
+    </select>
+  </label>
+  <noscript><button class="border rounded px-3">{% translate "Filtrar" %}</button></noscript>
+</form>
+<div id="inbox-table">{% include "requests/_inbox_table.html" %}</div>
+{% endblock %}

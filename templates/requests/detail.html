@@ -1,0 +1,119 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{{ req }}{% endblock %}
+{% block content %}
+{% with r=req %}
+<a href="{% if user.is_student %}{% url 'requests:my_requests' %}{% else %}{% url 'requests:inbox' %}{% endif %}" class="text-sm text-teal-700 underline">← {% translate "Volver" %}</a>
+<div class="flex flex-wrap items-start justify-between gap-4 mt-2 mb-6">
+  <div>
+    <p class="font-mono text-sm text-slate-500">{{ req.number|default:_("Borrador") }}</p>
+    <h1 class="text-3xl font-bold">{{ req.procedure.display_name }}</h1>
+    <p class="text-sm text-slate-600 mt-1">{{ req.student.get_full_name }} · {{ req.student.program }}</p>
+  </div>
+  <div class="text-right space-y-1">
+    <div>{% include "requests/_status.html" %}</div>
+    <div>{% include "requests/_deadline.html" %}</div>
+  </div>
+</div>
+
+{% if req.status == "NEEDS_CHANGES" and user.is_student %}
+<div class="bg-amber-50 border border-amber-300 rounded-xl p-4 mb-6 flex flex-wrap items-center justify-between gap-3">
+  <p class="text-amber-900">{% translate "La dependencia pidió ajustes a tu solicitud." %}</p>
+  <a href="{% url 'requests:edit' req.pk %}" class="bg-amber-500 hover:bg-amber-600 text-white rounded-lg px-4 py-2 font-medium">{% translate "Corregir ahora" %}</a>
+</div>
+{% endif %}
+
+{% if steps %}
+<ol class="flex flex-wrap gap-2 mb-8" aria-label="{% translate 'Etapas del trámite' %}">
+  {% for step in steps %}
+  <li class="flex-1 min-w-40 rounded-lg border px-4 py-3 text-sm
+    {% if step.state == 'done' %}border-emerald-300 bg-emerald-50{% elif step.state == 'current' %}border-indigo-400 bg-indigo-50 ring-2 ring-indigo-200{% elif step.state == 'rejected' %}border-rose-300 bg-rose-50{% else %}border-slate-200 bg-white text-slate-500{% endif %}">
+    <span class="block text-xs uppercase tracking-wide">{% translate "Etapa" %} {{ step.stage.order }} ·
+      {% if step.state == 'done' %}{% translate "completada" %}{% elif step.state == 'current' %}{% translate "en curso" %}{% elif step.state == 'rejected' %}{% translate "rechazada" %}{% elif step.state == 'skipped' %}{% translate "no aplica" %}{% else %}{% translate "pendiente" %}{% endif %}</span>
+    <span class="font-medium">{{ step.stage.department.display_name }}</span>
+  </li>
+  {% endfor %}
+</ol>
+{% endif %}
+
+<div class="grid lg:grid-cols-3 gap-6">
+  <section class="lg:col-span-2 bg-white border border-slate-200 rounded-xl p-6">
+    <h2 class="font-semibold text-lg mb-1">{% translate "Línea de tiempo" %}</h2>
+    {% if req.is_active %}
+    <p class="text-sm text-slate-600 mb-4">
+      {% blocktranslate with dept=req.current_stage.department.display_name days=req.days_in_stage total=req.days_elapsed %}Ahora en <strong>{{ dept }}</strong> · {{ days }} días en esta etapa · {{ total }} días desde la radicación.{% endblocktranslate %}
+    </p>
+    {% endif %}
+    {% if events %}
+    <ol class="relative border-l-2 border-slate-200 ml-2 space-y-6 mt-4">
+      {% for event in events %}
+      <li class="ml-5">
+        <span class="absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full {% if event.to_status == 'NEEDS_CHANGES' %}bg-amber-500{% elif event.to_status == 'REJECTED' %}bg-rose-500{% elif event.to_status == 'FINALIZED' or event.to_status == 'APPROVED' %}bg-emerald-500{% else %}bg-indigo-500{% endif %}"></span>
+        <p class="text-sm font-medium">{{ event.get_to_status_display }}{% if event.stage and event.to_status != "FINALIZED" %} · {{ event.stage.department.display_name }}{% endif %}</p>
+        <p class="text-xs text-slate-500">{{ event.created_at|date:"d/m/Y H:i" }}{% if event.actor %} · {{ event.actor.get_full_name|default:event.actor.username }}{% endif %}</p>
+        {% if event.comment %}<p class="text-sm mt-1 bg-slate-50 rounded p-2">{{ event.comment|linebreaksbr }}</p>{% endif %}
+      </li>
+      {% endfor %}
+    </ol>
+    {% else %}
+    <p class="text-sm text-slate-500">{% translate "La solicitud aún no ha sido radicada." %}</p>
+    {% endif %}
+  </section>
+
+  <div class="space-y-6">
+    {% if can_review %}
+    <section class="bg-white border-2 border-teal-600 rounded-xl p-5">
+      <h2 class="font-semibold mb-3">{% translate "Decisión de la dependencia" %}</h2>
+      <form method="post" action="{% url 'requests:review' req.pk %}" class="space-y-3">
+        {% csrf_token %}
+        <div class="form-field">
+          <label for="id_comment" class="block text-sm font-medium mb-1">{{ review_form.comment.label }}</label>
+          {{ review_form.comment }}
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <button name="action" value="approve" class="bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg px-4 py-2 text-sm font-medium">{% if req.current_stage.next_stage %}{% translate "Aprobar etapa" %}{% else %}{% translate "Aprobar y finalizar" %}{% endif %}</button>
+          <button name="action" value="changes" class="bg-amber-500 hover:bg-amber-600 text-white rounded-lg px-4 py-2 text-sm font-medium">{% translate "Pedir ajustes" %}</button>
+          <button name="action" value="reject" class="bg-rose-600 hover:bg-rose-700 text-white rounded-lg px-4 py-2 text-sm font-medium" onclick="return confirm('{% translate "¿Rechazar la solicitud? Esta acción la finaliza." %}')">{% translate "Rechazar" %}</button>
+        </div>
+      </form>
+    </section>
+    {% endif %}
+
+    {% if certificates %}
+    <section class="bg-white border border-emerald-300 rounded-xl p-5">
+      <h2 class="font-semibold mb-3">{% translate "Certificados" %}</h2>
+      <ul class="space-y-3 text-sm">
+        {% for c in certificates %}
+        <li class="flex items-center justify-between gap-2">
+          <span>{{ c.get_kind_display }} · <strong>{{ c.language|upper }}</strong><br><span class="font-mono text-xs text-slate-500">{{ c.code }}</span></span>
+          <a href="{% url 'certificates:download' c.pk %}" class="bg-emerald-600 text-white rounded px-3 py-1.5 text-xs font-medium">PDF ↓</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <section class="bg-white border border-slate-200 rounded-xl p-5">
+      <h2 class="font-semibold mb-3">{% translate "Datos" %}</h2>
+      <dl class="text-sm space-y-2">
+        {% for label, value in req.form_items %}
+        {% if value %}<div><dt class="text-slate-500">{{ label }}</dt><dd class="whitespace-pre-line">{{ value }}</dd></div>{% endif %}
+        {% endfor %}
+        {% if req.submitted_at %}<div><dt class="text-slate-500">{% translate "Radicada el" %}</dt><dd>{{ req.submitted_at|date:"d/m/Y H:i" }}</dd></div>{% endif %}
+      </dl>
+    </section>
+
+    <section class="bg-white border border-slate-200 rounded-xl p-5">
+      <h2 class="font-semibold mb-3">{% translate "Documentos" %}</h2>
+      {% if documents %}
+      <ul class="text-sm space-y-2">
+        {% for d in documents %}
+        <li><span class="text-slate-500">{{ d.required_document.display_name }}:</span><br>
+          <a class="text-teal-700 underline" href="{% url 'requests:document' d.pk %}">{{ d.original_name }}</a></li>
+        {% endfor %}
+      </ul>
+      {% else %}<p class="text-sm text-slate-500">{% translate "Sin documentos adjuntos." %}</p>{% endif %}
+    </section>
+  </div>
+</div>
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Ingresar" %}{% endblock %}
+{% block content %}
+<div class="max-w-md mx-auto bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+  <h1 class="text-2xl font-bold mb-1">{% translate "Ingresar" %}</h1>
+  <p class="text-sm text-slate-600 mb-6">{% translate "Radica y sigue tus trámites académicos en línea." %}</p>
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    {% if form.non_field_errors %}<div class="text-sm text-rose-700">{{ form.non_field_errors }}</div>{% endif %}
+    {% for field in form %}{% include "_field.html" %}{% endfor %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="w-full bg-teal-700 hover:bg-teal-800 text-white rounded-lg py-2.5 font-medium">{% translate "Ingresar" %}</button>
+  </form>
+  <p class="text-sm mt-6">{% translate "¿Eres estudiante y no tienes cuenta?" %} <a class="text-teal-700 underline" href="{% url 'accounts:register' %}">{% translate "Regístrate" %}</a></p>
+  <details class="mt-6 text-xs text-slate-500">
+    <summary class="cursor-pointer">{% translate "Usuarios de demostración" %}</summary>
+    <p class="mt-2">estudiante1 · funcionario_coordinacion · funcionario_comite · funcionario_registro · admin — {% translate "contraseña" %} <code>demo1234</code></p>
+  </details>
+</div>
+{% endblock %}

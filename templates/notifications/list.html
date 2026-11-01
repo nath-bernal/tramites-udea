@@ -1,0 +1,29 @@
+{% extends "base.html" %}{% load i18n %}
+{% block title %}{% translate "Notificaciones" %}{% endblock %}
+{% block content %}
+<div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+  <h1 class="text-3xl font-bold">{% translate "Notificaciones" %}</h1>
+  {% if unread_notifications %}
+  <form method="post" action="{% url 'notifications:mark_all_read' %}">{% csrf_token %}
+    <button class="text-sm text-teal-700 underline">{% translate "Marcar todas como leídas" %}</button>
+  </form>
+  {% endif %}
+</div>
+{% if notifications %}
+<ul class="bg-white border border-slate-200 rounded-xl divide-y divide-slate-100">
+  {% for n in notifications %}
+  <li>
+    <a href="{% url 'notifications:open' n.pk %}" class="flex gap-3 px-5 py-4 hover:bg-slate-50 {% if not n.is_read %}bg-teal-50/60{% endif %}">
+      <span class="mt-1.5 h-2 w-2 rounded-full shrink-0 {% if n.is_read %}bg-transparent{% else %}bg-teal-600{% endif %}" aria-hidden="true"></span>
+      <span>
+        <span class="block text-sm {% if not n.is_read %}font-medium{% endif %}">{{ n.message }}</span>
+        <span class="block text-xs text-slate-500">{{ n.created_at|timesince }}{% if not n.is_read %} · {% translate "sin leer" %}{% endif %}</span>
+      </span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="text-slate-600">{% translate "No tienes notificaciones." %}</p>
+{% endif %}
+{% endblock %}

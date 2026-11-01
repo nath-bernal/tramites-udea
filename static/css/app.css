@@ -1,0 +1,26 @@
+/* Estilos de formularios de Django (los widgets no llevan clases de Tailwind). */
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="password"],
+.form-field input[type="search"],
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  background: #fff;
+  font-size: 0.95rem;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: 2px solid #0f766e;
+  outline-offset: 1px;
+  border-color: #0f766e;
+}
+.form-field input[type="file"] { font-size: 0.9rem; }
+.form-field .errorlist { color: #be123c; font-size: 0.85rem; margin-top: 0.25rem; }
+.form-field .helptext { color: #64748b; font-size: 0.8rem; }
+.skip-link { position: absolute; left: -999px; }
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 50; background: #fff; padding: 0.5rem 1rem; }

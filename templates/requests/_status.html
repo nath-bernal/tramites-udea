@@ -1,0 +1,1 @@
+{% load request_tags %}<span class="inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 {{ r.status|status_classes }}">{{ r.get_status_display }}{% if r.status == "FINALIZED" and r.outcome %} · {{ r.get_outcome_display }}{% endif %}</span>

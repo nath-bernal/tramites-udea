@@ -1,0 +1,34 @@
+[project]
+name = "tramite-claro"
+version = "0.1.0"
+description = "Prototipo académico para radicar, rastrear y resolver trámites académicos de pregrado."
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=5.2,<5.3",
+    "weasyprint>=62",
+    "qrcode[pil]>=7.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-django>=4.9", "ruff>=0.6"]
+postgres = ["psycopg[binary]>=3.2"]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["config*", "apps*"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["**/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "DJ"]

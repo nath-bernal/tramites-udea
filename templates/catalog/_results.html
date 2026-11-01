@@ -1,0 +1,17 @@
+{% load i18n %}
+{% if procedures %}
+<div class="grid sm:grid-cols-2 gap-4">
+  {% for procedure in procedures %}
+  <a href="{% url 'catalog:detail' procedure.code %}" class="block bg-white border border-slate-200 rounded-xl p-5 hover:border-teal-600 hover:shadow-sm transition">
+    <h2 class="font-semibold text-lg">{{ procedure.display_name }}</h2>
+    <p class="text-sm text-slate-600 mt-1">{{ procedure.display_description|truncatewords:28 }}</p>
+    <p class="text-xs text-slate-500 mt-3">
+      {% blocktranslate count n=procedure.stages.all|length %}{{ n }} etapa{% plural %}{{ n }} etapas{% endblocktranslate %}
+      · {% blocktranslate with days=procedure.estimated_days %}~{{ days }} días hábiles{% endblocktranslate %}
+    </p>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p class="text-slate-600">{% translate "No hay trámites que coincidan con la búsqueda." %}</p>
+{% endif %}
