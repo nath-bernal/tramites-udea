@@ -1,5 +1,6 @@
 """Crea datos de demostración. Todos los datos son ficticios."""
 
+import os
 from datetime import timedelta
 
 from django.core.files.base import ContentFile
@@ -324,6 +325,10 @@ class Command(BaseCommand):
             )
             if created:
                 user.set_password(PASSWORD)
+                user.save()
+            if role == User.Role.ADMIN and os.environ.get("DEMO_ADMIN_PASSWORD"):
+                # En un despliegue público el administrador no usa la contraseña de demo.
+                user.set_password(os.environ["DEMO_ADMIN_PASSWORD"])
                 user.save()
             users[username] = user
         return users

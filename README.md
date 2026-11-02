@@ -219,3 +219,25 @@ Las 7 fases del plan están implementadas. `pytest` pasa (63 pruebas) y `ruff` e
 ### Notas de instalación en macOS
 - WeasyPrint necesita Pango: `brew install pango`. Si se usa el Python de python.org, hay que exportar `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` antes de `runserver`. Sin Pango la app funciona, pero no puede emitir certificados: la aprobación se revierte y se muestra un mensaje. Las pruebas reemplazan el PDF por uno falso, salvo una prueba de integración que se omite si falta Pango.
 - Si el repositorio está en una carpeta sincronizada con iCloud (por ejemplo `~/Documents`), hay que crear el entorno virtual fuera de ella (`python -m venv ~/.venvs/tramite-claro`). Si no, la importación de paquetes se vuelve extremadamente lenta.
+
+---
+
+## 13. Despliegue en Render (gratis)
+
+Servicio web gratuito de Render (Docker) más PostgreSQL gratuito de Neon. Los archivos subidos y los certificados se guardan en la base de datos (`apps/dbfiles`), porque el disco de Render se borra en cada reinicio.
+
+Archivos que intervienen: `Dockerfile`, `render.yaml`, `bin/start.sh` (migraciones, `seed_demo` y Gunicorn) y `requirements.txt`.
+
+1. **Base de datos en Neon**: crear una cuenta en https://neon.tech, crear un proyecto (región cercana, p. ej. AWS us-east) y copiar la *connection string* (`postgresql://…?sslmode=require`).
+2. **Servicio en Render**: crear una cuenta en https://render.com con GitHub. Luego **New → Blueprint**, elegir el repositorio `tramites-udea` y Render leerá `render.yaml`.
+3. **Variables** que pide el blueprint:
+   - `DATABASE_URL`: la connection string de Neon.
+   - `DEMO_ADMIN_PASSWORD`: contraseña del usuario `admin` (no usar `demo1234`; la app es pública).
+   - `DJANGO_SECRET_KEY` la genera Render automáticamente.
+4. **Deploy**. Al terminar, la app queda en `https://tramite-claro-XXXX.onrender.com` con los datos de demo cargados.
+
+Notas:
+- Plan gratis: el servicio se duerme tras 15 minutos sin visitas y tarda alrededor de 1 minuto en despertar. Abrir la URL un rato antes de la exposición.
+- Cada push a `main` vuelve a desplegar (`autoDeploy`).
+- Los correos salen por consola: se ven en **Logs** de Render. Las notificaciones en la app sí funcionan.
+- Probar la imagen localmente: `docker build -t tramite-claro .` y luego `docker run -p 8000:8000 -e DJANGO_SECRET_KEY=x -e DJANGO_ALLOWED_HOSTS=localhost -e DATABASE_URL=postgres://… tramite-claro`.

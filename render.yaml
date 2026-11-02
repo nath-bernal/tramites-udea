@@ -1,0 +1,17 @@
+# Blueprint de Render: crea el servicio web gratuito a partir del Dockerfile.
+# La base de datos es PostgreSQL de Neon (gratis y permanente): pega su URL en DATABASE_URL.
+services:
+  - type: web
+    name: tramite-claro
+    runtime: docker
+    plan: free
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /tramites/
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: DEMO_ADMIN_PASSWORD
+        sync: false
