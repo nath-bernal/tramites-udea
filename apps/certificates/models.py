@@ -19,7 +19,8 @@ class Language(models.TextChoices):
 class CertificateTemplate(models.Model):
     """Plantilla HTML del cuerpo del certificado. Variables disponibles:
 
-    ``student_name``, ``document``, ``program``, ``number``, ``issued_date``, ``code``.
+    ``student_name``, ``document``, ``program``, ``number``, ``issued_date``, ``code``,
+    ``total_credits``, ``average`` y ``courses`` (historia académica simulada).
     """
 
     kind = models.CharField(_("tipo"), max_length=10, choices=CertificateKind.choices)
@@ -29,7 +30,8 @@ class CertificateTemplate(models.Model):
         _("cuerpo (HTML)"),
         help_text=_(
             "Plantilla de Django. Variables: {{ student_name }}, {{ document }}, {{ program }}, "
-            "{{ number }}, {{ issued_date }}, {{ code }}."
+            "{{ number }}, {{ issued_date }}, {{ code }}, {{ total_credits }}, {{ average }} y la "
+            "lista {{ courses }} (code, name, credits, term, grade, content)."
         ),
     )
     is_active = models.BooleanField(_("activa"), default=True)

@@ -214,6 +214,7 @@ Las 7 fases del plan están implementadas. `pytest` pasa (63 pruebas) y `ruff` e
 - El administrador ve todas las solicitudes en modo de solo lectura. Solo los funcionarios de la dependencia de la etapa actual pueden decidir.
 - Además de los campos del borrador del modelo de datos se agregó `ProcedureField`, para que los campos del formulario de cada trámite sean configurables.
 - Los días hábiles no descuentan los festivos colombianos (simplificación del prototipo).
+- Como el prototipo no se conecta a un sistema académico, los certificados de notas y de contenidos usan una historia académica simulada (`apps/certificates/academic.py`). Son materias ficticias con créditos, notas y contenidos en español e inglés. Cada estudiante recibe siempre la misma historia, y el PDF indica que es ficticia. Las plantillas por defecto están en `apps/certificates/defaults.py`.
 - `seed_demo` crea además `estudiante2` y `estudiante3` (misma contraseña) y 7 solicitudes de ejemplo en distintos estados, con fechas pasadas para alimentar los indicadores. El certificado de `estudiante1` queda pendiente en Admisiones y Registro, para aprobarlo en vivo con `funcionario_registro`.
 
 ### Notas de instalación en macOS

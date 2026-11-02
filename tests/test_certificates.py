@@ -38,8 +38,10 @@ def test_single_language(certificate_request, staff):
 
 
 def test_missing_template_rolls_back_approval(certificate_request, staff):
+    from apps.certificates.models import CertificateTemplate
     from apps.certificates.services import CertificateError
 
+    CertificateTemplate.objects.filter(kind="grades").delete()
     req = certificate_request("es", kind="grades")
     with pytest.raises(CertificateError):
         services.approve(req, staff["registro"])
@@ -58,7 +60,7 @@ def test_certificate_html_has_watermark_qr_and_data(certificate_request, certifi
     from apps.certificates.models import CertificateTemplate
 
     req = certificate_request("es")
-    template = CertificateTemplate.objects.get(language="en")
+    template = CertificateTemplate.objects.get(kind="studies", language="en")
     html = build_certificate_html(req, template, "ABCD-EFGH-JKMN")
     assert "PROTOTIPO ACADÉMICO – SIN VALIDEZ OFICIAL" in html
     assert "data:image/png;base64," in html
@@ -101,10 +103,59 @@ def test_real_pdf_rendering_if_available(certificate_request, certificate_proced
 
     req = certificate_request("es")
     html = build_certificate_html(
-        req, CertificateTemplate.objects.get(language="es"), "AAAA-BBBB-CCCC"
+        req, CertificateTemplate.objects.get(kind="studies", language="es"), "AAAA-BBBB-CCCC"
     )
     try:
         pdf = render_pdf(html)
     except CertificateRenderError:
         pytest.skip("WeasyPrint sin librerías del sistema")
     assert pdf.startswith(b"%PDF")
+
+
+def test_academic_record_is_stable_and_consistent(student):
+    from apps.certificates.academic import academic_record, weighted_average
+
+    first = academic_record(student)
+    assert first == academic_record(student)
+    assert 7 <= len(first) <= 10
+    assert all(3 <= r.grade <= 5 for r in first)
+    average = weighted_average(first)
+    assert min(r.grade for r in first) <= average <= max(r.grade for r in first)
+    english = academic_record(student, "en")
+    assert [r.code for r in english] == [r.code for r in first]
+    assert english[0].name == "Differential Calculus"
+
+
+@pytest.mark.parametrize(
+    ("kind", "language", "expected"),
+    [
+        (
+            "contents",
+            "es",
+            ["Certificado de contenidos", "Cálculo diferencial", "Funciones reales"],
+        ),
+        (
+            "contents",
+            "en",
+            ["Course Content Certificate", "Differential Calculus", "Real functions"],
+        ),
+        ("grades", "es", ["Certificado de notas", "Cálculo diferencial", "Promedio crédito"]),
+        ("grades", "en", ["Grades Certificate", "Differential Calculus", "Cumulative grade"]),
+        ("studies", "es", ["Certificado de estudios", "créditos"]),
+    ],
+)
+def test_each_certificate_kind_has_its_own_content(certificate_request, kind, language, expected):
+    """Las plantillas reales (creadas por migración) muestran el contenido de cada tipo."""
+    from apps.certificates.defaults import TEMPLATES
+    from apps.certificates.models import CertificateTemplate
+
+    title, body = TEMPLATES[(kind, language)]
+    template, _ = CertificateTemplate.objects.update_or_create(
+        kind=kind, language=language, defaults={"title": title, "body_html": body}
+    )
+    req = certificate_request(language)
+    html = build_certificate_html(req, template, "ABCD-EFGH-JKMN")
+    for text in expected:
+        assert text in html
+    if kind == "studies":
+        assert "Cálculo diferencial" not in html

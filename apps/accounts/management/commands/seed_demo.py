@@ -11,6 +11,7 @@ from django.utils import timezone
 
 from apps.accounts.models import Department, User
 from apps.catalog.models import ProcedureField, ProcedureStage, ProcedureType, RequiredDocument
+from apps.certificates.defaults import TEMPLATES
 from apps.certificates.models import CertificateTemplate
 from apps.requests import services
 from apps.requests.models import Request, RequestEvent
@@ -166,61 +167,6 @@ PROCEDURES = [
         ],
     },
 ]
-
-INTRO_ES = (
-    "<p>La Oficina de Admisiones y Registro del programa académico, en el marco del prototipo "
-    "Trámite Claro,</p><p class='certifies'>CERTIFICA QUE:</p>"
-    "<p><strong>{{ student_name }}</strong>, identificado(a) con documento "
-    "<strong>{{ document }}</strong>, "
-)
-INTRO_EN = (
-    "<p>The Admissions and Registrar's Office of the academic program, within the Trámite "
-    "Claro prototype,</p><p class='certifies'>HEREBY CERTIFIES THAT:</p>"
-    "<p><strong>{{ student_name }}</strong>, holder of ID number "
-    "<strong>{{ document }}</strong>, "
-)
-CLOSING_ES = (
-    "<p>Se expide a solicitud del interesado el {{ issued_date }}, con radicado {{ number }}.</p>"
-)
-CLOSING_EN = (
-    "<p>Issued at the request of the student on {{ issued_date }}, under filing number "
-    "{{ number }}.</p>"
-)
-
-TEMPLATES = {
-    ("studies", "es"): (
-        "Certificado de estudios",
-        INTRO_ES + "se encuentra matriculado(a) en el programa de pregrado "
-        "<strong>{{ program }}</strong> en el semestre académico vigente.</p>" + CLOSING_ES,
-    ),
-    ("studies", "en"): (
-        "Enrollment Certificate",
-        INTRO_EN + "is currently enrolled in the undergraduate program "
-        "<strong>{{ program }}</strong> for the current academic term.</p>" + CLOSING_EN,
-    ),
-    ("grades", "es"): (
-        "Certificado de notas",
-        INTRO_ES + "cursa el programa de pregrado <strong>{{ program }}</strong> y su historial "
-        "de calificaciones (datos ficticios de demostración) registra un promedio crédito "
-        "acumulado de <strong>4.1</strong> sobre 5.0.</p>" + CLOSING_ES,
-    ),
-    ("grades", "en"): (
-        "Grades Certificate",
-        INTRO_EN + "is enrolled in the undergraduate program <strong>{{ program }}</strong> "
-        "and their academic record (fictitious demo data) shows a cumulative grade point "
-        "average of <strong>4.1</strong> out of 5.0.</p>" + CLOSING_EN,
-    ),
-    ("contents", "es"): (
-        "Certificado de contenidos",
-        INTRO_ES + "cursó en el programa <strong>{{ program }}</strong> los cursos cuyos "
-        "contenidos programáticos oficiales se anexan a este certificado.</p>" + CLOSING_ES,
-    ),
-    ("contents", "en"): (
-        "Course Content Certificate",
-        INTRO_EN + "took, in the program <strong>{{ program }}</strong>, the courses whose "
-        "official syllabi are attached to this certificate.</p>" + CLOSING_EN,
-    ),
-}
 
 FAKE_PDF = b"%PDF-1.4\n% Documento ficticio de demostracion - Tramite Claro\n%%EOF\n"
 

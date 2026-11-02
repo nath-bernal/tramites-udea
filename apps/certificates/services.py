@@ -11,6 +11,7 @@ from django.urls import reverse
 from django.utils import timezone, translation
 from django.utils.translation import gettext as _
 
+from .academic import academic_record, weighted_average
 from .models import CertificateKind, CertificateTemplate, IssuedCertificate, Language
 from .pdf import render_pdf
 
@@ -43,8 +44,12 @@ def _certificate_options(req):
 
 def build_certificate_html(req, template, code):
     student = req.student
+    courses = academic_record(student, template.language)
     with translation.override(template.language):
         context = {
+            "courses": courses,
+            "total_credits": sum(c.credits for c in courses),
+            "average": weighted_average(courses),
             "student_name": student.get_full_name() or student.username,
             "document": student.document_number,
             "program": student.program,

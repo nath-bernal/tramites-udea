@@ -117,11 +117,13 @@ def certificate_procedure(departments):
         choices="es|Español|Spanish\nen|Inglés|English\nboth|Ambos|Both",
     )
     for lang in ("es", "en"):
-        CertificateTemplate.objects.create(
+        CertificateTemplate.objects.update_or_create(
             kind="studies",
             language=lang,
-            title=f"Certificado {lang}",
-            body_html="<p>{{ student_name }} · {{ program }} · {{ code }}</p>",
+            defaults={
+                "title": f"Certificado {lang}",
+                "body_html": "<p>{{ student_name }} · {{ program }} · {{ code }}</p>",
+            },
         )
     return procedure
 
